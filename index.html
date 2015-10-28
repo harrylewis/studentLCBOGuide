@@ -1,42 +1,10 @@
 <!DOCTYPE html>
 	<html>
 		<head>
-			<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-			<script type="text/javascript">
-			$(function() {
-				$.ajax({
-  url: 'https://lcboapi.com/products?access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
-  method: 'GET',
-		dataType: 'json',
-  headers: { 'Authorization': 'MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk' },
-  crossDomain	: true
-}).then(function(data) {
-	for (var i = 0; i < data.result.length; i++)
-  		console.log(data.result[i]);
-});
-			console.log(true);
-			console.log("Hello!");
-			console.log("Evan");
-			console.log("yo");
-			console.log("I'm back");
-			console.log("Mom's spaghetti");
-			console.log("dang boi");
-			console.log(false);
-
-			// $.ajax({
-			// 	url: 'http://en.wikipedia.org/w/api.php?action=query&format=json&callback=test&prop=langlinks&lllimit=500&titles=string',
-			// 	method: 'GET',
-			// 	dataType: 'jsonp'
-			// }).then(function(data) {
-			// 	console.log(data);
-			// });
-
-			// })
-
-			// $.getJSON("http://en.wikipedia.org/w/api.php?action=parse&format=json&callback=?", {page:"Red Sea clownfish", prop:"text"}, function(data) {console.log(data);});
-			console.log(true);
-			</script>
-
+			<title>Student LCBO Guide</title>
+			<!-- make this site functional -->
+			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+			<script src="assets/js/lcbo.js"></script>
 		</head>
 		<body>
 
