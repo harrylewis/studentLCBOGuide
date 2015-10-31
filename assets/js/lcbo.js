@@ -26,7 +26,7 @@ $(function() {
 		//   		console.log(data.result[i].name);
 		// });
 
-		navigator.geolocation.getCurrentPosition(getNearestStores);
+		//navigator.geolocation.getCurrentPosition(getNearestStores);
 
 		// function showPosition(position) {
 		// 	console.log(position);
