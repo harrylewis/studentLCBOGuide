@@ -19,7 +19,7 @@ $(function() {
 		//   		console.log(data.result[i].name);
 		// });
 
-		navigator.geolocation.getCurrentPosition(showPosition);
+		// navigator.geolocation.getCurrentPosition(showPosition);
 
 		function showPosition(position) {
 			console.log(position);
@@ -38,9 +38,10 @@ $(function() {
 				console.log(data);
 				for (var i = 0; i < data.result.length; i++)
 			  		console.log(data.result[i]);
-			  	// find beer at a place
+			  	console.log(data.result.length);
+			  	// find some deals
 			  	$.ajax({
-					url: 'https://lcboapi.com/products?store=' + data.result[0].id + '&q=coors+light&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
+					url: 'https://lcboapi.com/products?store=' + data.result[0].id + '&q=vodka&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
 					method: 'GET',
 					dataType: 'jsonp', 
 					headers: {
@@ -52,10 +53,15 @@ $(function() {
 					console.log(data);
 					for (var i = 0; i < data.result.length; i++)
 				  		console.log(data.result[i]);
+				  	console.log(data.result.length);
 				  	// find beer at a place
 				  	
 				});
 			});
+		}
+
+		function getBeers(product) {
+
 		}
 
 	})();
