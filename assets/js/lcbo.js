@@ -26,7 +26,7 @@ $(function() {
 			console.log(position.coords.latitude);
 			console.log(position.coords.longitude);
 			$.ajax({
-				url: 'https://lcboapi.com/stores?lat=' + position.coords.latitude + '&lon=' + position.coords.longitude + '&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
+				url: 'https://lcboapi.com/stores?lat=' + position.coords.latitude + '&lon=' + position.coords.longitude + '&page=5&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
 				method: 'GET',
 				dataType: 'jsonp', 
 				headers: {
@@ -36,11 +36,12 @@ $(function() {
 				crossDomain	: true
 			}).then(function(data) {
 				console.log(data);
+				console.log(data.result.length);
 				for (var i = 0; i < data.result.length; i++)
-			  		console.log(data.result[i]);
+			  		console.log(data.result[i].updated_at);
 			  	// find beer at a place
 			  	$.ajax({
-					url: 'https://lcboapi.com/products?store=' + data.result[0].id + '&q=coors+light&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
+					url: 'https://lcboapi.com/products?store=' + data.result[0].id + '&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
 					method: 'GET',
 					dataType: 'jsonp', 
 					headers: {
@@ -49,7 +50,7 @@ $(function() {
 					},
 					crossDomain	: true
 				}).then(function(data) {
-					console.log(data);
+					//console.log(data);
 					for (var i = 0; i < data.result.length; i++)
 				  		console.log(data.result[i]);
 				  	// find beer at a place
