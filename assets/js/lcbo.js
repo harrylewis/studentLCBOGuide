@@ -38,18 +38,11 @@ $(function() {
 				console.log(data);
 				console.log(data.result.length);
 				for (var i = 0; i < data.result.length; i++)
-<<<<<<< HEAD
-			  		console.log(data.result[i].updated_at);
-			  	// find beer at a place
-			  	$.ajax({
-					url: 'https://lcboapi.com/products?store=' + data.result[0].id + '&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
-=======
 			  		console.log(data.result[i]);
 			  	console.log(data.result.length);
 			  	// find some deals
 			  	$.ajax({
 					url: 'https://lcboapi.com/products?store=' + data.result[0].id + '&q=vodka&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
->>>>>>> a0efe04287c10f85c81ab8ed8902e4bac1c01e4c
 					method: 'GET',
 					dataType: 'jsonp', 
 					headers: {
