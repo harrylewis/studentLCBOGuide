@@ -2,12 +2,18 @@ $(function() {
 	
 	// global app object
 	var SLCBOG = (function() {
+		// global position variables for geolocation
+		var latitude;
+		var longitude;
+
+		// let's find out where you are
+		navigator.geolocation.getCurrentPosition(setCoordinates);
 
 		// handle searching for alcohol
 		$('#alcoholSearch').submit(function(e) {
 			e.preventDefault();
 			// get the user's current location to find the nearest stores
-			navigator.geolocation.getCurrentPosition(getNearestStores);
+			getNearestStores(latitude, longitude, $('#searchProduct').val());
 		});
 
 		// pull data from the LCBO object
@@ -68,12 +74,12 @@ $(function() {
 		// 	});
 		// }
 
-		function getNearestStores(position) {
+		function getNearestStores(latitude, longitude, queryResult) {
 			var selectedStores = [];
 			var distance = 5000;
 
 			$.ajax({
-				url: 'https://lcboapi.com/stores?lat=' + position.coords.latitude + '&lon=' + position.coords.longitude + '&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
+				url: 'https://lcboapi.com/stores?lat=' + latitude + '&lon=' + longitude + '&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
 				method: 'GET',
 				dataType: 'jsonp',
 				headers: {
@@ -92,13 +98,13 @@ $(function() {
 				for (var i = 0; i < selectedStores.length; i++)
 					console.log(selectedStores[i]);
 
-				getBeers(selectedStores);
+				getBeers(selectedStores, queryResult);
 			});
 		}
 
-		function getBeers(stores) {
+		function getBeers(stores, queryResult) {
 			$.ajax({
-				url: 'https://lcboapi.com/products?store=' + stores[0].id + '&q=' + $('#searchProduct').val() + '&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
+				url: 'https://lcboapi.com/products?store=' + stores[0].id + '&q=' + queryResult + '&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
 				method: 'GET',
 				dataType: 'jsonp',
 				headers: {
@@ -109,6 +115,13 @@ $(function() {
 			}).then(function(products) {
 				console.log(products)
 			});
+		}
+
+		function setCoordinates(position) {
+			latitude = position.coords.latitude;
+			longitude = position.coords.longitude;
+			console.log(latitude);
+			console.log(longitude);
 		}
 
 	})();
