@@ -73,7 +73,7 @@ $(function() {
 			var distance = 5000;
 
 			$.ajax({
-				url: 'https://lcboapi.com/stores?lat=' + position.coords.latitude + '&lon=' + position.coords.longitude + '&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
+				url: 'https://lcboapi.com/stores?lat=' + position.coords.latitude + '&lon=' + position.coords.longitude + '&per_page=100&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
 				method: 'GET',
 				dataType: 'jsonp',
 				headers: {
@@ -83,7 +83,7 @@ $(function() {
 				crossDomain : true
 			}).then(function(data) {
 				// display stores
-				// console.log(data);
+				console.log(data);
 				for (var i = 0; i < data.result.length; i++) {
 					if (!data.result[i].is_dead && data.result[i].distance_in_meters < distance)
 						selectedStores.push(data.result[i]);
