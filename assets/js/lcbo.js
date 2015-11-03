@@ -7,7 +7,7 @@ $(function() {
 		var longitude;
 		// global variable to access nearest stores to user
 		var selectedStores = [];
-
+		
 		// let's find out where you are
 		navigator.geolocation.getCurrentPosition(findStores);
 
@@ -84,6 +84,6 @@ $(function() {
 			});
 		}
 
-	});
+	})();
 
 });
