@@ -73,9 +73,8 @@ $(function() {
 				
 				// parsing through data to find the largest savings
 				for (var i = 0; i < productArray.length; i++) {
-					if (productArray[i].limited_time_offer_savings_in_cents >= bestDealPrice) {
+					if (productArray[i].limited_time_offer_savings_in_cents >= bestDealPrice)
 						bestProduct.push(productArray[i]);
-					}
 				}
 
 				// displays alcohol with the best savings
@@ -83,14 +82,25 @@ $(function() {
 					console.log(bestProduct[i].name + " " + bestProduct[i].package + " has a savings of $" + bestProduct[i].limited_time_offer_savings_in_cents / 100 + " and is priced at $" + bestProduct[i].price_in_cents / 100);
 				}
 
-				checkDealDate(bestProduct[0].limited_time_offer_ends_on);
+				console.log(bestProduct[0]);
 
 			});
 		}
 
 		function ounceConvert(product) {
-			if (product.primary_category == "Spirits") {
-				console.log(Math.round(product.volume_in_milliliters / 29));
+			var ounces;
+			if (product.hasOwnProperty("primary_category") && product.primary_category == "Spirits") {
+				ounces = Math.round(product.volume_in_milliliters / 29);
+				// case one - 26 ounces
+				if (ounces == 25 || ounces == 27)
+					ounces = 26;
+				// case two - 40 ounces
+				else if (ounces == 39 || ounces == 41)
+					ounces = 40;
+				// case three - 60 ounces
+				else if (ounces == 59 || ounces == 61)
+					ounces = 60;
+				console.log(ounces);
 			}
 		}
 
