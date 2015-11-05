@@ -2,17 +2,22 @@
 	<html>
 		<head>
 			<title>Student LCBO Guide</title>
+			<!-- make this site look good -->
+			<link rel="stylesheet" href="assets/scss/main.css">
 			<!-- make this site functional -->
 			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 			<script src="assets/js/lcbo.js"></script>
 		</head>
 		<body>
 
-			<form id="alcoholSearch">
-				<p>What do you want to drink tonight?</p>
-				<input id="searchProduct" type="text" placeholder="ex. Coors Light">
-				<input type="submit" value="Submit">
-			</form>
+			<div class="drink">
+
+				<form id="alcoholSearch" class="drink__search cf">
+					<input id="searchProduct" class="drink__search__input" type="text" placeholder="What do you want to drink?" autofocus autocomplete="off">
+					<input type="submit" class="drink__search__submit" value="Find Drinks">
+				</form>
+
+			</div>
 
 		</body>
 	</html>

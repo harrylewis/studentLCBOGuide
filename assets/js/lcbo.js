@@ -17,12 +17,25 @@ $(function() {
 		// let's find out where you are
 		navigator.geolocation.getCurrentPosition(findStores);
 
+		// set up the app
+		$('.drink').height(window.innerHeight);
+
 		// handle searching for alcohol
 		$('#alcoholSearch').submit(function(e) {
 			e.preventDefault();
 			// find deals from the current store and a searched value
 			checkDeals(currentStore, $('#searchProduct').val());
 		});
+
+		// fun input handling
+		// $('#searchProduct').keypress(function(e) {
+		// 	$(e.currentTarget)
+		// 		.removeClass('drink__search__input--typing')
+		// 		.addClass('drink__search__input--typing')
+		// 		.on('animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd', function(e) {
+		// 			$(e.currentTarget).removeClass('drink__search__input--typing');
+		// 		});
+		// })
 
 		function findStores(position) {
 			// set the coordinates

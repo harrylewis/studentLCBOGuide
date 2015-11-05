@@ -1,0 +1,125 @@
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,900,700,600,300,200);
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+.cf:before,
+.cf:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */ }
+
+.cf:after {
+  clear: both;
+  display: block; }
+
+.cf {
+  /* For IE 6/7 only. Include this rule to trigger hasLayout and contain floats. */
+  *zoom: 1; }
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+@-webkit-keyframes searchTyping {
+  0% {
+    background: #F39C12; }
+
+  35% {
+    background: #DF8800; }
+
+  100% {
+    background: #F39C12; } }
+
+* {
+  font-family: "Titillium Web"; }
+
+body {
+  background: #F39C12;
+  font-size: 62.5%; }
+
+.drink {
+  max-width: 120em;
+  padding: 2em;
+  margin: 0 auto;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  align-items: center; }
+
+.drink__search {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  border: 2px solid white; }
+
+.drink__search__input {
+  font-size: 2em;
+  display: inline-block;
+  width: calc(100% - 10em);
+  float: left;
+  margin: 0;
+  padding: 0.5em;
+  border: 0;
+  background: #F39C12;
+  color: white;
+  outline: none; }
+  .drink__search__input::-webkit-input-placeholder {
+    color: rgba(255, 255, 255, 0.75); }
+
+.drink__search__input--typing {
+  -webkit-animation: searchTyping 1s; }
+
+.drink__search__submit {
+  font-size: 2em;
+  display: inline-block;
+  width: 10em;
+  float: left;
+  margin: 0;
+  padding: 0.5em;
+  border: 0;
+  background: white;
+  color: #F39C12; }
