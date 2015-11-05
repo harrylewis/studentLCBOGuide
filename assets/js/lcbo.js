@@ -84,6 +84,7 @@ $(function() {
 			}).then(function(deals) {
 				var bestDealPrice = 0;
 				var bestProduct = [];
+				productArray = [];
 				// pushing our search results into an array
 				for (var i = 0; i < deals.result.length; i++) {
 					if (!deals.result[i].is_dead && deals.result[i].has_limited_time_offer)
@@ -103,6 +104,7 @@ $(function() {
 				}
 
 				ounceConvert(bestProduct[0]);
+				console.log(bestProduct);
 
 			});
 		}
