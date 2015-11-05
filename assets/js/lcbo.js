@@ -2,11 +2,15 @@ $(function() {
 	
 	// global app object
 	var SLCBOG = (function() {
-		// global position variables for geolocation
+		// API URL prefix and suffix
+		var urlPrefix = 'https://lcboapi.com/';
+		var urlSuffix = '&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk';
+		// coords for geolocation
 		var latitude;
 		var longitude;
 		// global variable to access nearest stores to user
-		var selectedStores = [];
+		var filteredStores = [];
+		var currentStore;
 		// global variable to store products into an array
 		var productArray = [];
 		
@@ -16,48 +20,40 @@ $(function() {
 		// handle searching for alcohol
 		$('#alcoholSearch').submit(function(e) {
 			e.preventDefault();
-			
-			// get the user's current location to find the nearest stores
-			var queryResult = $('#searchProduct').val();
-			getBeers(selectedStores, queryResult);
-			checkDeals(selectedStores, queryResult);
+			// find deals from the current store and a searched value
+			checkDeals(currentStore, $('#searchProduct').val());
 		});
 
 		function findStores(position) {
-			// first we need to set the coordinates of the user
+			// set the coordinates
 			latitude = position.coords.latitude;
 			longitude = position.coords.longitude;
-			console.log(latitude);
-			console.log(longitude);
-
-			// now we can find the nearest store within a radius
-			var distance = 5000;
-
+			// a 5000m radius (as the crow flies) for filtering stores
+			var maxRadius = 5000;
+			// GET stores
 			$.ajax({
-				url: 'https://lcboapi.com/stores?lat=' + latitude + '&lon=' + longitude + '&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
+				url: urlPrefix + 'stores?order=distance_in_meters.asc&lat=' + latitude + '&lon=' + longitude + urlSuffix,
 				method: 'GET',
 				dataType: 'jsonp',
-				headers: {
-					Authorization: 'MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
-					Accept: 'application/vnd.api+json'
-				},
 				crossDomain: true
 			}).then(function(data) {
-				// display stores
-				// console.log(data);
+				// filter through stores
 				for (var i = 0; i < data.result.length; i++) {
-					if (!data.result[i].is_dead && data.result[i].distance_in_meters < distance)
-						selectedStores.push(data.result[i]);
+					if (!data.result[i].is_dead && data.result[i].distance_in_meters < maxRadius)
+						filteredStores.push(data.result[i]);
 				}
-
-				for (var i = 0; i < selectedStores.length; i++)
-					console.log(selectedStores[i]);
+				// set current store
+				currentStore = filteredStores[0];
 			});
 		}
 
-		function getBeers(stores, queryResult) {
+		function changeCurrentStore() {
+
+		}
+
+		function getBeers(closestStore, queryResult) {
 			$.ajax({
-				url: 'https://lcboapi.com/products?store=' + stores[0].id + '&q=' + queryResult + '&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
+				url: 'https://lcboapi.com/products?store=' + closestStore.id + '&q=' + queryResult + '&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
 				method: 'GET',
 				dataType: 'jsonp',
 				headers: {
@@ -104,9 +100,11 @@ $(function() {
 					console.log(bestProduct[i].name + " " + bestProduct[i].package + " has a savings of $" + bestProduct[i].limited_time_offer_savings_in_cents / 100 + " and is priced at $" + bestProduct[i].price_in_cents / 100);
 				}
 
-				ounceConvert(bestProduct[0]);
+				//ounceConvert(bestProduct[0]);
 				console.log(bestProduct);
-
+				var date = bestProduct[0].limited_time_offer_ends_on;
+				console.log(date + "Z");
+				console.log(new Date(date.toString() + "T10:20:30Z"))
 			});
 		}
 
