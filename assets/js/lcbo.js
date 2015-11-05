@@ -84,6 +84,10 @@ $(function() {
 			}).then(function(deals) {
 				var bestDealPrice = 0;
 				var bestProduct = [];
+				productArray = [];
+
+ 				console.log("Hello Harold!");
+
 				// pushing our search results into an array
 				for (var i = 0; i < deals.result.length; i++) {
 					if (!deals.result[i].is_dead && deals.result[i].has_limited_time_offer)
@@ -102,17 +106,14 @@ $(function() {
 					console.log(bestProduct[i].name + " " + bestProduct[i].package + " has a savings of $" + bestProduct[i].limited_time_offer_savings_in_cents / 100 + " and is priced at $" + bestProduct[i].price_in_cents / 100);
 				}
 
-				ounceConvert(bestProduct[0]);
+				// ounceConvert(bestProduct[l0]);
 
 			});
 		}
 
 		function ounceConvert(product) {
-			var ounceVolume;
-
 			if (product.primary_category == "Spirits") {
-				ounceVolume = product.volume_in_milliliters / 29.6;
-				console.log(ounceVolume);
+				console.log(product.volume_in_milliliters / 29);
 			}
 		}
 
