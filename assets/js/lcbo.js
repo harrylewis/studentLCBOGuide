@@ -7,7 +7,7 @@ $(function() {
 		var longitude;
 		// global variable to access nearest stores to user
 		var selectedStores = [];
-		
+
 		// let's find out where you are
 		navigator.geolocation.getCurrentPosition(findStores);
 
@@ -71,7 +71,7 @@ $(function() {
 
 		function checkDeals(stores) {
 			$.ajax({
-				url: 'https://lcboapi.com/products?store=' + stores[0].id + '&where=has_limited_time_offer&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
+				url: 'https://lcboapi.com/products?store=' + stores[0].id + '&where=has_bonus_reward_miles&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
 				method: 'GET',
 				dataType: 'jsonp',
 				headers: {
@@ -80,6 +80,7 @@ $(function() {
 				},
 				crossDomain: true
 			}).then(function(deals) {
+				console.log("deals");
 				console.log(deals);
 			});
 		}
