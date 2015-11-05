@@ -73,7 +73,7 @@ $(function() {
 
 		function checkDeals(stores, queryResult) {
 			$.ajax({
-				url: 'https://lcboapi.com/products?store=' + stores[0].id + '&where=has_bonus_reward_miles&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
+				url: 'https://lcboapi.com/products?store=' + stores[0].id + '&q=' + queryResult + '&where=has_limited_time_offer&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
 				method: 'GET',
 				dataType: 'jsonp',
 				headers: {
@@ -101,6 +101,7 @@ $(function() {
 				for (var i = 0; i < bestProduct.length; i++) {
 					console.log(bestProduct[i].name + " " + bestProduct[i].package + " has a savings of $" + bestProduct[i].limited_time_offer_savings_in_cents / 100 + " and is priced at $" + bestProduct[i].price_in_cents / 100);
 				}
+
 			});
 		}
 
