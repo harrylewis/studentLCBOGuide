@@ -101,17 +101,46 @@ $(function() {
 				}
 
 				//ounceConvert(bestProduct[0]);
+				// harry's version
 				console.log(bestProduct);
 				var date = bestProduct[0].limited_time_offer_ends_on;
 				console.log(date + "Z");
 				console.log(new Date(date.toString() + "T10:20:30Z"))
+				// evan's version
+				console.log(bestProduct[0].name + " deal expires on " + bestProduct[0].limited_time_offer_ends_on);
+				convertDate(bestProduct[0].limited_time_offer_ends_on);
 			});
 		}
 
 		function ounceConvert(product) {
 			if (product.primary_category == "Spirits") {
-				console.log(product.volume_in_milliliters / 29);
+				console.log(Math.round(product.volume_in_milliliters / 29));
 			}
+		}
+
+		function convertDate(date) {
+		
+			// split into array and get the expiration date
+			modifiedDate = date.split('-');
+			var dealDate = new Date(modifiedDate[0], modifiedDate[1]-1, modifiedDate[2]);
+			console.log(dealDate);
+			
+			// getting the current date
+			var today = new Date();
+			console.log(today);
+
+			// convert into milliseconds and calculate the days remaining
+			dealDate = dealDate.getTime();
+			console.log(dealDate);
+			today = today.getTime();
+			console.log(today);
+
+			// calculating the days remaining
+			var secondsRemaining = (dealDate - today) / 1000;
+			var minutesRemaining = secondsRemaining / 60;
+			var hoursRemaining = minutesRemaining / 60;
+			var daysRemaining = (hoursRemaining / 24);
+			console.log("You have " + daysRemaining + " days remaining for this sale.");
 		}
 
 	})();
