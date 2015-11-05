@@ -44,6 +44,8 @@ $(function() {
 				}
 				// set current store
 				currentStore = filteredStores[0];
+				// success
+				console.log("The stores have been found");
 			});
 		}
 
@@ -51,25 +53,10 @@ $(function() {
 
 		}
 
-		function getBeers(closestStore, queryResult) {
-			$.ajax({
-				url: 'https://lcboapi.com/products?store=' + closestStore.id + '&q=' + queryResult + '&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
-				method: 'GET',
-				dataType: 'jsonp',
-				headers: {
-					Authorization: 'MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
-					Accept: 'application/vnd.api+json'
-				},
-				crossDomain: true
-			}).then(function(products) {
-				console.log(products);
-			});
-		}
 
-
-		function checkDeals(stores, queryResult) {
+		function checkDeals(closestStore, queryResult) {
 			$.ajax({
-				url: 'https://lcboapi.com/products?store=' + stores[0].id + '&q=' + queryResult + '&where=has_limited_time_offer&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
+				url: 'https://lcboapi.com/products?store=' + closestStore.id + '&q=' + queryResult + '&where=has_limited_time_offer&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
 				method: 'GET',
 				dataType: 'jsonp',
 				headers: {
