@@ -87,7 +87,7 @@ $(function() {
 					console.log(bestProduct[i].name + " " + bestProduct[i].package + " has a savings of $" + bestProduct[i].limited_time_offer_savings_in_cents / 100 + " and is priced at $" + bestProduct[i].price_in_cents / 100);
 				}
 
-				convertDate(bestProduct[0].limited_time_offer_ends_on);
+				checkDealDate(bestProduct[0].limited_time_offer_ends_on);
 			});
 		}
 
@@ -97,31 +97,27 @@ $(function() {
 			}
 		}
 
-		function convertDate(date) {
-		
-			// split into array and get the expiration date
+		function checkDealDate(date) {
+			// get expiration date and current date
 			modifiedDate = date.split('-');
-			var dealDate = new Date(modifiedDate[0], modifiedDate[1]-1, modifiedDate[2]);
-			console.log(dealDate);
-			
-			// getting the current date
+			var dealDate = new Date(modifiedDate[0], modifiedDate[1] - 1, modifiedDate[2]);
 			var today = new Date();
-			console.log(today);
-
-			// convert into milliseconds and calculate the days remaining
+			// calculating difference
 			dealDate = dealDate.getTime();
-			console.log(dealDate);
 			today = today.getTime();
-			console.log(today);
-
-			// calculating the days remaining
-			var secondsRemaining = (dealDate - today) / 1000;
-			var minutesRemaining = secondsRemaining / 60;
-			var hoursRemaining = minutesRemaining / 60;
-			var daysRemaining = (hoursRemaining / 24);
-			console.log("You have " + daysRemaining + " days remaining for this sale.");
+			var difference = dealDate - today;
+			// more than a day
+			if (difference >= 86400000) {
+				var daysRemaining = ((((difference) / 1000) / 60) / 60) / 24;
+				console.log("You have " + daysRemaining + " days remaining for this sale.");
+			}
+			// less than a day
+			else if (difference < 86400000) {
+				var hoursRemaining = (((difference) / 1000) / 60) / 60;
+				console.log("You have " + hoursRemaining + " hours remaining for this sale.");
+			}
 		}
-
+		
 	})();
 
 });
