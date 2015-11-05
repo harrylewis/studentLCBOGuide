@@ -87,14 +87,6 @@ $(function() {
 					console.log(bestProduct[i].name + " " + bestProduct[i].package + " has a savings of $" + bestProduct[i].limited_time_offer_savings_in_cents / 100 + " and is priced at $" + bestProduct[i].price_in_cents / 100);
 				}
 
-				//ounceConvert(bestProduct[0]);
-				// harry's version
-				console.log(bestProduct);
-				var date = bestProduct[0].limited_time_offer_ends_on;
-				console.log(date + "Z");
-				console.log(new Date(date.toString() + "T10:20:30Z"))
-				// evan's version
-				console.log(bestProduct[0].name + " deal expires on " + bestProduct[0].limited_time_offer_ends_on);
 				convertDate(bestProduct[0].limited_time_offer_ends_on);
 			});
 		}
