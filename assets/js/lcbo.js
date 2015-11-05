@@ -56,13 +56,9 @@ $(function() {
 
 		function checkDeals(closestStore, queryResult) {
 			$.ajax({
-				url: 'https://lcboapi.com/products?store=' + closestStore.id + '&q=' + queryResult + '&where=has_limited_time_offer&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
+				url: urlPrefix + '/products?store=' + closestStore.id + '&q=' + queryResult + '&where=has_limited_time_offer' + urlSuffix,
 				method: 'GET',
 				dataType: 'jsonp',
-				headers: {
-					Authorization: 'MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
-					Accept: 'application/vnd.api+json'	
-				},
 				crossDomain: true
 			}).then(function(deals) {
 				var bestDealPrice = 0;
@@ -88,6 +84,7 @@ $(function() {
 				}
 
 				checkDealDate(bestProduct[0].limited_time_offer_ends_on);
+
 			});
 		}
 
@@ -95,6 +92,44 @@ $(function() {
 			if (product.primary_category == "Spirits") {
 				console.log(Math.round(product.volume_in_milliliters / 29));
 			}
+		}
+
+		function opHours(store, day) {
+			var open = 0;
+			var close = 0;
+			// starts from 0 - Sunday
+			switch(day) {
+				case 0:
+					open 	= store.sunday_open;
+					close 	= store.sunday_close;
+				break;
+				case 1:
+					open 	= store.monday_open;
+					close 	= store.monday_close;
+				break;
+				case 2:
+					open 	= store.tuesday_open;
+					close 	= store.tuesday_close;
+				break;
+				case 3:
+					open 	= store.wednesday_open;
+					close 	= store.wednesday_close;
+				break;
+				case 4:
+					open 	= store.thursday_open;
+					close 	= store.thursday_close;
+				break;
+				case 5:
+					open 	= store.friday_open;
+					close 	= store.friday_close;
+				break;
+				case 6:
+					open 	= store.saturday_open;
+					close 	= store.saturday_close;
+				break;
+			}
+			// return parsed open and close hours in 24 hour time
+			return { o : { h : open / 60 , m : open % 60 } , c : { h : close / 60 , m : close % 60 } };
 		}
 
 		function checkDealDate(date) {
