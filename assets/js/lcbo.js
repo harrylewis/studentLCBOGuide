@@ -7,6 +7,8 @@ $(function() {
 		var longitude;
 		// global variable to access nearest stores to user
 		var selectedStores = [];
+		// global variable to store products into an array
+		var productArray = [];
 		
 		// let's find out where you are
 		navigator.geolocation.getCurrentPosition(findStores);
@@ -18,7 +20,7 @@ $(function() {
 			// get the user's current location to find the nearest stores
 			var queryResult = $('#searchProduct').val();
 			getBeers(selectedStores, queryResult);
-			checkDeals(selectedStores);
+			checkDeals(selectedStores, queryResult);
 		});
 
 		function findStores(position) {
@@ -69,9 +71,9 @@ $(function() {
 		}
 
 
-		function checkDeals(stores) {
+		function checkDeals(stores, queryResult) {
 			$.ajax({
-				url: 'https://lcboapi.com/products?store=' + stores[0].id + '&where=has_limited_time_offer&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
+				url: 'https://lcboapi.com/products?store=' + stores[0].id + '&q=' + queryResult + '&where=has_limited_time_offer&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk',
 				method: 'GET',
 				dataType: 'jsonp',
 				headers: {
@@ -80,7 +82,15 @@ $(function() {
 				},
 				crossDomain: true
 			}).then(function(deals) {
-				console.log(deals);
+				// pushing our search results into an array
+				for (var i = 0; i < deals.result.length; i++) {
+					if (!deals.result[i].is_dead)
+						productArray.push(deals.result[i]);
+				}
+				// finding how large the difference is
+				var savings = productArray[0].limited_time_offer_savings_in_cents / 100;
+				
+				console.log("The product savings for " + productArray[0].name + " " +productArray[0].package + " is $" + savings);
 			});
 		}
 
