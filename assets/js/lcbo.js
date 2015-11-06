@@ -72,26 +72,49 @@ $(function() {
 		}
 
 		function scanProducts(closestStore, queryResult) {
-			$.ajax({
-				url: urlPrefix + '/products?order=limited_time_offer_savings_in_cents.desc&store=' + closestStore.id + '&q=' + queryResult + urlSuffix,
-				method: 'GET',
-				dataType: 'jsonp',
-				crossDomain: true
-			}).then(function(products) {
-				// clear resultArray
-				resultArray = [];
+			// split queryResult into an array
+			queryResult = queryResult.split(" ");
 
-				// pushing our search results into an array
-				for (var i = 0; i < products.result.length; i++) {
-					// checking if the product is not dead
-					if (!products.result[i].is_dead)
-						resultArray.push(products.result[i]);
-				}
+			if (queryResult.length > 1 && (queryResult.indexOf("and") > -1 || queryResult.indexOf("&") > -1)) {
+				$.ajax({
+					url: urlPrefix + '/products?order=limited_time_offer_savings_in_cents.desc&store=' + closestStore.id + '&q=' + queryResult[0] + urlSuffix,
+					method: 'GET',
+					dataType: 'jsonp',
+					crossDomain: true
+				}).then(function(products) {
+					resultArray = [];
 
-				// print deals on the product search, if any
-				printDeals(resultArray);
+					// pushing search results into array
+					for (var i = 0; i < products.result.length; i++) {
+						if (!products.result[i].is_dead)
+							resultArray.push(products.result[i]);
+					}
 
-			});		
+					// print deals on the product search if any exist
+					printDeals(resultArray);
+
+				});
+			}
+			else {
+				$.ajax({
+					url: urlPrefix + '/products?order=limited_time_offer_savings_in_cents.desc&store=' + closestStore.id + '&q=' + queryResult[0] + urlSuffix,
+					method: 'GET',
+					dataType: 'jsonp',
+					crossDomain: true
+				}).then(function(products) {
+					resultArray = [];
+
+					// pushing search results into array
+					for (var i = 0; i < products.result.length; i++) {
+						if (!products.result[i].is_dead)
+							resultArray.push(products.result[i]);
+					}
+
+					// print deals on the product search if any exist
+					printDeals(resultArray);
+
+				});				
+			}
 		}
 
 		function printDeals(productResult) {
@@ -100,8 +123,7 @@ $(function() {
 					console.log(productResult[i].name + " " + productResult[i].package + " has a savings of $" + productResult[i].limited_time_offer_savings_in_cents / 100 +
 					" and is priced at $" + productResult[i].price_in_cents / 100 + ".");
 				else
-					console.log(productResult[i].name + " " + productResult[i].package + " is priced at $" + productResult[i].price_in_cents / 100 + ".");					
-
+					console.log(productResult[i].name + " " + productResult[i].package + " is priced at $" + productResult[i].price_in_cents / 100 + ".");				
 			}
 		}
 
