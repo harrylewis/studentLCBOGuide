@@ -85,30 +85,20 @@ $(function() {
 						resultArray.push(products.result[i]);
 				}
 
-				// now we can check if there are any deals on the product
-				checkDeals(resultArray);
-
-				// implement a check flag in checkDeals
-				// if the flag is true, print the other results here
+				// print deals on the product search, if any
+				printDeals(resultArray);
 
 			});		
 		}
 
-		function checkDeals(productResult) {
-			var bestDealPrice = 0;
-			dealArray = [];
-
+		function printDeals(productResult) {
 			for (var i = 0; i < productResult.length; i++) {
-				if (productResult[i].has_limited_time_offer) {
-					if (productResult[i].limited_time_offer_savings_in_cents >= bestDealPrice) {
-						dealArray.push(productResult[i]);
-					}
-				}
-			}
+				if (productResult[i].has_limited_time_offer)
+					console.log(productResult[i].name + " " + productResult[i].package + " has a savings of $" + productResult[i].limited_time_offer_savings_in_cents / 100 +
+					" and is priced at $" + productResult[i].price_in_cents / 100 + ".");
+				else
+					console.log(productResult[i].name + " " + productResult[i].package + " is priced at $" + productResult[i].price_in_cents / 100 + ".");					
 
-			for (var i = 0; i < dealArray.length; i++) {
-				console.log(dealArray[i].name + " " + dealArray[i].package + " has a savings of $" + dealArray[i].limited_time_offer_savings_in_cents / 100 +
-							" and is priced at $" + dealArray[i].price_in_cents / 100 + ".");
 			}
 		}
 
@@ -172,15 +162,18 @@ $(function() {
 			modifiedDate = date.split('-');
 			var dealDate = new Date(modifiedDate[0], modifiedDate[1] - 1, modifiedDate[2]);
 			var today = new Date();
+
 			// calculating difference
 			dealDate = dealDate.getTime();
 			today = today.getTime();
 			var difference = dealDate - today;
+
 			// more than a day
 			if (difference >= 86400000) {
 				var daysRemaining = ((((difference) / 1000) / 60) / 60) / 24;
 				console.log("You have " + daysRemaining + " days remaining for this sale.");
 			}
+
 			// less than a day
 			else if (difference < 86400000) {
 				var hoursRemaining = (((difference) / 1000) / 60) / 60;
