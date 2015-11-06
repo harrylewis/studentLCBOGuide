@@ -72,7 +72,6 @@ $(function() {
 			// split queryResult into an array
 			queryResult = queryResult.split(" ");
 
-			// 
 			if (queryResult.length > 1 && (queryResult.indexOf("and") > -1 || queryResult.indexOf("&") > -1)) {
 				$.ajax({
 					url: urlPrefix + '/products?order=limited_time_offer_savings_in_cents.desc&store=' + closestStore.id + '&q=' + queryResult[0] + urlSuffix,
