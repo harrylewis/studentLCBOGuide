@@ -11,9 +11,10 @@ $(function() {
 		// global variable to access nearest stores to user
 		var filteredStores = [];
 		var currentStore;
-		// global variable to store products into an array
-		var productArray = [];
-		console.log(typeof exports === 'object');
+		// global variable to store results into an array
+		var resultArray = [];
+		// global variable to store deal results into an array
+		var dealArray = [];
 		
 		// let's find out where you are
 		navigator.geolocation.getCurrentPosition(findStores);
@@ -25,7 +26,7 @@ $(function() {
 		$('#alcoholSearch').submit(function(e) {
 			e.preventDefault();
 			// find deals from the current store and a searched value
-			checkDeals(currentStore, $('#searchProduct').val());
+			scanProducts(currentStore, $('#searchProduct').val());
 		});
 
 		// fun input handling
@@ -67,38 +68,48 @@ $(function() {
 
 		}
 
-
-		function checkDeals(closestStore, queryResult) {
-			$.ajax({
+		function scanProducts(closestStore, queryResult) {
+				$.ajax({
 				url: urlPrefix + '/products?order=limited_time_offer_savings_in_cents.desc&store=' + closestStore.id + '&q=' + queryResult + urlSuffix,
 				method: 'GET',
 				dataType: 'jsonp',
 				crossDomain: true
-			}).then(function(deals) {
-				var bestDealPrice = 0;
-				var bestProduct = [];
-				productArray = [];
+			}).then(function(products) {
+				// clear resultArray
+				resultArray = [];
 
 				// pushing our search results into an array
-				for (var i = 0; i < deals.result.length; i++) {
-					if (!deals.result[i].is_dead && deals.result[i].has_limited_time_offer)
-						productArray.push(deals.result[i]);
-				}
-				
-				// parsing through data to find the largest savings
-				for (var i = 0; i < productArray.length; i++) {
-					if (productArray[i].limited_time_offer_savings_in_cents >= bestDealPrice)
-						bestProduct.push(productArray[i]);
+				for (var i = 0; i < products.result.length; i++) {
+					// checking if the product is not dead
+					if (!products.result[i].is_dead)
+						resultArray.push(products.result[i]);
 				}
 
-				// displays alcohol with the best savings
-				for (var i = 0; i < bestProduct.length; i++) {
-					console.log(bestProduct[i].name + " " + bestProduct[i].package + " has a savings of $" + bestProduct[i].limited_time_offer_savings_in_cents / 100 + " and is priced at $" + bestProduct[i].price_in_cents / 100);
-				}
-				
-				//checkDealDate(bestProduct[0].limited_time_offer_ends_on);
+				// now we can check if there are any deals on the product
+				checkDeals(resultArray);
 
-			});
+				// implement a check flag in checkDeals
+				// if the flag is true, print the other results here
+
+			});		
+		}
+
+		function checkDeals(productResult) {
+			var bestDealPrice = 0;
+			dealArray = [];
+
+			for (var i = 0; i < productResult.length; i++) {
+				if (productResult[i].has_limited_time_offer) {
+					if (productResult[i].limited_time_offer_savings_in_cents >= bestDealPrice) {
+						dealArray.push(productResult[i]);
+					}
+				}
+			}
+
+			for (var i = 0; i < dealArray.length; i++) {
+				console.log(dealArray[i].name + " " + dealArray[i].package + " has a savings of $" + dealArray[i].limited_time_offer_savings_in_cents / 100 +
+							" and is priced at $" + dealArray[i].price_in_cents / 100 + ".");
+			}
 		}
 
 		function ounceConvert(product) {
