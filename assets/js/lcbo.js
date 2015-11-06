@@ -69,7 +69,7 @@ $(function() {
 		}
 
 		function scanProducts(closestStore, queryResult) {
-				$.ajax({
+			$.ajax({
 				url: urlPrefix + '/products?order=limited_time_offer_savings_in_cents.desc&store=' + closestStore.id + '&q=' + queryResult + urlSuffix,
 				method: 'GET',
 				dataType: 'jsonp',
@@ -100,9 +100,7 @@ $(function() {
 
 			for (var i = 0; i < productResult.length; i++) {
 				if (productResult[i].has_limited_time_offer) {
-					if (productResult[i].limited_time_offer_savings_in_cents >= bestDealPrice) {
-						dealArray.push(productResult[i]);
-					}
+					dealArray.push(productResult[i]);
 				}
 			}
 
