@@ -13,6 +13,7 @@ $(function() {
 		var currentStore;
 		// global variable to store products into an array
 		var productArray = [];
+		console.log(typeof exports === 'object');
 		
 		// let's find out where you are
 		navigator.geolocation.getCurrentPosition(findStores);
