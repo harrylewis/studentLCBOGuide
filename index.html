@@ -11,12 +11,15 @@
 		<body>
 
 			<div class="drink">
-
-				<form id="alcoholSearch" class="drink__search cf">
-					<input id="searchProduct" class="drink__search__input" type="text" placeholder="What do you want to drink?" autofocus autocomplete="off">
-					<input type="submit" class="drink__search__submit" value="Find Drinks">
-				</form>
-
+				<div class="drink__container">
+					<section class="drink__status">
+						<img class="drink__logo drink__logo--animate" src="assets/images/cocktail-shaker.svg">
+					</section>
+					<form id="alcoholSearch" class="drink__search drink__search--hidden cf">
+						<input id="searchProduct" class="drink__search__input" type="text" placeholder="What do you want to drink?" autofocus autocomplete="off">
+						<input type="submit" class="drink__search__submit" value="Find Drinks">
+					</form>
+				</div>
 			</div>
 
 		</body>

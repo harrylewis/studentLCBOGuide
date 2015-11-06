@@ -20,7 +20,7 @@ $(function() {
 		navigator.geolocation.getCurrentPosition(findStores);
 
 		// set up the app
-		$('.drink').height(window.innerHeight);
+		$('.drink__status').css('-webkit-transform', 'translateY(50%)');
 
 		// handle searching for alcohol
 		$('#alcoholSearch').submit(function(e) {
@@ -40,6 +40,9 @@ $(function() {
 		// })
 
 		function findStores(position) {
+			// loading finished
+			$('.drink__logo').removeClass('drink__logo--animate');
+			$('.drink').removeClass('drink--flex');
 			// set the coordinates
 			latitude = position.coords.latitude;
 			longitude = position.coords.longitude;

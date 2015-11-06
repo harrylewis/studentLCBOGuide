@@ -71,6 +71,44 @@ table {
   100% {
     background: #F39C12; } }
 
+@-webkit-keyframes cocktailShakerOrientRight {
+  7.5% {
+    -webkit-transform: translateY(10%) translateX(-5.45455%) rotate(20deg); }
+
+  15% {
+    -webkit-transform: translateY(-10%) translateX(5.45455%) rotate(20deg); }
+
+  22.5% {
+    -webkit-transform: translateY(10%) translateX(-5.45455%) rotate(20deg); }
+
+  30% {
+    -webkit-transform: translateY(-10%) translateX(5.45455%) rotate(20deg); }
+
+  37.5% {
+    -webkit-transform: translateY(10%) translateX(-5.45455%) rotate(20deg); }
+
+  45% {
+    -webkit-transform: translateY(0) translateX(0) rotate(20deg); } }
+
+@-webkit-keyframes cocktailShakerOrientStraight {
+  7.5% {
+    -webkit-transform: translateY(10%); }
+
+  15% {
+    -webkit-transform: translateY(-10%); }
+
+  22.5% {
+    -webkit-transform: translateY(10%); }
+
+  30% {
+    -webkit-transform: translateY(-10%); }
+
+  37.5% {
+    -webkit-transform: translateY(10%); }
+
+  45% {
+    -webkit-transform: translateY(0); } }
+
 * {
   font-family: "Titillium Web"; }
 
@@ -80,15 +118,34 @@ body {
 
 .drink {
   max-width: 120em;
-  padding: 2em;
-  margin: 0 auto;
+  padding: 0 2em;
+  margin: 0 auto; }
+
+.drink--flex {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
   -ms-flex-align: center;
   -webkit-align-items: center;
   -webkit-box-align: center;
-  align-items: center; }
+  align-items: center;
+  border: 1px solid red; }
+
+.drink__container {
+  width: 100%; }
+
+.drink__status {
+  display: block;
+  width: 100%; }
+
+.drink__logo {
+  display: block;
+  margin: 0 auto;
+  height: 6em;
+  -webkit-transform: translateY(0) rotate(20deg); }
+
+.drink__logo--animate {
+  -webkit-animation: cocktailShakerOrientRight 2s infinite; }
 
 .drink__search {
   display: block;
