@@ -88,14 +88,15 @@ $(function() {
 				dataType: 'jsonp',
 				crossDomain: true
 			}).then(function(products) {
+				var d = timeRemaining(closestStore, products.result[0].limited_time_offer_ends_on);
+				console.log(d);
 				// clear previous results
 				resultArray = [];
 				// filter and create new product objects to display on page
 				for (var i = 0; i < products.result.length; i++) {
 					if (!products.result[i].is_dead)
 						resultArray.push({
-							name 					: products.result[i].name
-
+							name : products.result[i].name
 						});
 				}
 
@@ -173,28 +174,27 @@ $(function() {
 			return { o : { h : open / 60 , m : open % 60 } , c : { h : close / 60 , m : close % 60 } };
 		}
 
-		function checkDealDate(date) {
+		function timeRemaining(store, date) {
 			// get expiration date and current date
-			modifiedDate = date.split('-');
-			var dealDate = new Date(modifiedDate[0], modifiedDate[1] - 1, modifiedDate[2]);
+			parsedDate = date.split('-');
+			// create date based on when deal ends and modify time to closing time
+			var dealDate = new Date(parsedDate[0], parsedDate[1] - 1, parsedDate[2]);
+				dealDate.setHours(opHours(store, dealDate.getDay()).c.h);
+				dealDate.setMinutes(opHours(store, dealDate.getDay()).c.m);
+				dealDate = dealDate.getTime();
 			var today = new Date();
-
-			// calculating difference
-			dealDate = dealDate.getTime();
-			today = today.getTime();
+				today = today.getTime();
+			// get the difference in milliseconds
 			var difference = dealDate - today;
 
 			// more than a day
-			if (difference >= 86400000) {
-				var daysRemaining = ((((difference) / 1000) / 60) / 60) / 24;
-				console.log("You have " + daysRemaining + " days remaining for this sale.");
-			}
-
+			if (difference >= 86400000)
+				// convert for number of days
+				return parseInt(((((difference) / 1000) / 60) / 60) / 24) + ' days';
 			// less than a day
-			else if (difference < 86400000) {
-				var hoursRemaining = (((difference) / 1000) / 60) / 60;
-				console.log("You have " + hoursRemaining + " hours remaining for this sale.");
-			}
+			else if (difference < 86400000)
+				// convert for number of hours
+				return parseInt((((difference) / 1000) / 60) / 60) + ' hours';
 		}
 		
 	}();
