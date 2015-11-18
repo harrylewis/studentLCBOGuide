@@ -101,7 +101,7 @@ $(function() {
 							package : products.result[i].package,
 							packageType : products.result[i].package_unit_type,
 							savings : (products.result[i].limited_time_offer_savings_in_cents) / 100,
-							saleEnd : timeRemainingForDeal(closestStore, products.result[i].limited_time_offer_ends_on),
+							saleEnd : timeRemainingForDeal(closestStore, products.result[i]),
 							category : products.result[i].primary_category,
 							volume : ounceConvert(products.result[i]),
 							description : products.result[i].serving_suggestion,
@@ -185,27 +185,30 @@ $(function() {
 			return { o : { h : open / 60 , m : open % 60 } , c : { h : close / 60 , m : close % 60 } };
 		}
 
-		function timeRemainingForDeal(store, date) {
-			// get expiration date and current date
-			parsedDate = date.split('-');
-			// create date based on when deal ends and modify time to closing time
-			var dealDate = new Date(parsedDate[0], parsedDate[1] - 1, parsedDate[2]);
-				dealDate.setHours(opHours(store, dealDate.getDay()).c.h);
-				dealDate.setMinutes(opHours(store, dealDate.getDay()).c.m);
-				dealDate = dealDate.getTime();
-			var today = new Date();
-				today = today.getTime();
-			// get the difference in milliseconds
-			var difference = dealDate - today;
+		function timeRemainingForDeal(store, product) {
+			// check if there is a deal
+			if (product.has_limited_time_offer) {
+				// get expiration date and current date
+				parsedDate = product.limited_time_offer_ends_on.split('-');
+				// create date based on when deal ends and modify time to closing time
+				var dealDate = new Date(parsedDate[0], parsedDate[1] - 1, parsedDate[2]);
+					dealDate.setHours(opHours(store, dealDate.getDay()).c.h);
+					dealDate.setMinutes(opHours(store, dealDate.getDay()).c.m);
+					dealDate = dealDate.getTime();
+				var today = new Date();
+					today = today.getTime();
+				// get the difference in milliseconds
+				var difference = dealDate - today;
 
-			// more than a day
-			if (difference >= 86400000)
-				// convert for number of days
-				return parseInt(((((difference) / 1000) / 60) / 60) / 24) + ' days';
-			// less than a day
-			else if (difference < 86400000)
-				// convert for number of hours
-				return parseInt((((difference) / 1000) / 60) / 60) + ' hours';
+				// more than a day
+				if (difference >= 86400000)
+					// convert for number of days
+					return parseInt(((((difference) / 1000) / 60) / 60) / 24) + ' days';
+				// less than a day
+				else if (difference < 86400000)
+					// convert for number of hours
+					return parseInt((((difference) / 1000) / 60) / 60) + ' hours';
+			}
 		}
 		
 	}();
