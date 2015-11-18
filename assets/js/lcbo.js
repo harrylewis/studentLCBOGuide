@@ -101,7 +101,7 @@ $(function() {
 							package : products.result[i].package,
 							packageType : products.result[i].package_unit_type,
 							savings : (products.result[i].limited_time_offer_savings_in_cents) / 100,
-							saleEnd : products.result[i].limited_time_offer_ends_on,
+							saleEnd : timeRemainingForDeal(closestStore, products.result[i].limited_time_offer_ends_on),
 							category : products.result[i].primary_category,
 							volume : ounceConvert(products.result[i]),
 							description : products.result[i].serving_suggestion,
