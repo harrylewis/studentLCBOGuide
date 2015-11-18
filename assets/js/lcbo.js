@@ -88,7 +88,7 @@ $(function() {
 				dataType: 'jsonp',
 				crossDomain: true
 			}).then(function(products) {
-				var d = timeRemaining(closestStore, products.result[0].limited_time_offer_ends_on);
+				var d = timeRemainingForDeal(closestStore, products.result[0].limited_time_offer_ends_on);
 				console.log(d);
 				// clear previous results
 				resultArray = [];
@@ -96,7 +96,16 @@ $(function() {
 				for (var i = 0; i < products.result.length; i++) {
 					if (!products.result[i].is_dead)
 						resultArray.push({
-							name : products.result[i].name
+							name : products.result[i].name,
+							price : (products.result[i].price_in_cents) / 100,
+							package : products.result[i].package,
+							packageType : products.result[i].package_unit_type,
+							savings : (products.result[i].limited_time_offer_savings_in_cents) / 100,
+							saleEnd : products.result[i].limited_time_offer_ends_on,
+							category : products.result[i].primary_category,
+							volume : ounceConvert(products.result[i]),
+							description : products.result[i].serving_suggestion,
+							productUpdate : products.result[i].updated_at
 						});
 				}
 
@@ -132,8 +141,10 @@ $(function() {
 				// case three - 60 ounces
 				else if (ounces == 59 || ounces == 61)
 					ounces = 60;
-				console.log(ounces);
+				return ounces;
 			}
+			else
+				return product.volume_in_milliliters;
 		}
 
 		function opHours(store, day) {
@@ -174,7 +185,7 @@ $(function() {
 			return { o : { h : open / 60 , m : open % 60 } , c : { h : close / 60 , m : close % 60 } };
 		}
 
-		function timeRemaining(store, date) {
+		function timeRemainingForDeal(store, date) {
 			// get expiration date and current date
 			parsedDate = date.split('-');
 			// create date based on when deal ends and modify time to closing time
