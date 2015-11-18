@@ -119,24 +119,16 @@ body {
 .drink {
   max-width: 120em;
   padding: 0 2em;
-  margin: 0 auto; }
-
-.drink--flex {
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  align-items: center;
-  border: 1px solid red; }
+  margin: 0 auto;
+  position: relative; }
 
 .drink__container {
   width: 100%; }
 
 .drink__status {
   display: block;
-  width: 100%; }
+  width: 100%;
+  padding: 4em; }
 
 .drink__logo {
   display: block;
