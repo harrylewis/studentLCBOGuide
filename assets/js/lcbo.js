@@ -1,7 +1,7 @@
 $(function() {
-	
+
 	// global app object
-	var SLCBOG = (function() {
+	var SLCBOG = function() {
 		// API URL prefix and suffix
 		var urlPrefix = 'https://lcboapi.com/';
 		var urlSuffix = '&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk';
@@ -15,12 +15,19 @@ $(function() {
 		var resultArray = [];
 		// global variable to store deal results into an array
 		var dealArray = [];
+		// ajax object
+		// function ajaxObj = {
+		// 	url: urlPrefix + '/products?order=limited_time_offer_savings_in_cents.desc&store=' + closestStore.id + '&q=' + queryResult[0] + urlSuffix,
+		// 	method: 'GET',
+		// 	dataType: 'jsonp',
+		// 	crossDomain: true
+		// }
 		
 		// let's find out where you are
 		navigator.geolocation.getCurrentPosition(findStores);
 
 		// set up the app
-		$('.drink__status').css('-webkit-transform', 'translateY(50%)');
+		$('.drink').height(window.innerHeight);
 
 		// handle searching for alcohol
 		$('#alcoholSearch').submit(function(e) {
@@ -74,59 +81,41 @@ $(function() {
 		function scanProducts(closestStore, queryResult) {
 			// split queryResult into an array
 			queryResult = queryResult.split(" ");
+			// get all of the products
+			$.ajax({
+				url: urlPrefix + '/products?order=limited_time_offer_savings_in_cents.desc&store=' + closestStore.id + '&q=' + queryResult[0] + urlSuffix,
+				method: 'GET',
+				dataType: 'jsonp',
+				crossDomain: true
+			}).then(function(products) {
+				// clear previous results
+				resultArray = [];
+				// filter and create new product objects to display on page
+				for (var i = 0; i < products.result.length; i++) {
+					if (!products.result[i].is_dead)
+						resultArray.push({
+							name 					: products.result[i].name
 
-			if (queryResult.length > 1 && (queryResult.indexOf("and") > -1 || queryResult.indexOf("&") > -1)) {
-				$.ajax({
-					url: urlPrefix + '/products?order=limited_time_offer_savings_in_cents.desc&store=' + closestStore.id + '&q=' + queryResult[0] + urlSuffix,
-					method: 'GET',
-					dataType: 'jsonp',
-					crossDomain: true
-				}).then(function(products) {
-					resultArray = [];
+						});
+				}
 
-					// pushing search results into array
-					for (var i = 0; i < products.result.length; i++) {
-						if (!products.result[i].is_dead)
-							resultArray.push(products.result[i]);
-					}
+				console.log(resultArray)
 
-					// print deals on the product search if any exist
-					printDeals(resultArray);
+				// print deals on the product search if any exist
+				printDeals(resultArray);
 
-				});
-			}
-			else {
-				queryResult = queryResult.join(" ");
+			});
 
-				$.ajax({
-					url: urlPrefix + '/products?order=limited_time_offer_savings_in_cents.desc&store=' + closestStore.id + '&q=' + queryResult + urlSuffix,
-					method: 'GET',
-					dataType: 'jsonp',
-					crossDomain: true
-				}).then(function(products) {
-					resultArray = [];
-
-					// pushing search results into array
-					for (var i = 0; i < products.result.length; i++) {
-						if (!products.result[i].is_dead)
-							resultArray.push(products.result[i]);
-					}
-
-					// print deals on the product search if any exist
-					printDeals(resultArray);
-
-				});				
-			}
 		}
 
 		function printDeals(productResult) {
-			for (var i = 0; i < productResult.length; i++) {
-				if (productResult[i].has_limited_time_offer)
-					console.log(productResult[i].name + " " + productResult[i].package + " has a savings of $" + productResult[i].limited_time_offer_savings_in_cents / 100 +
-					" and is priced at $" + productResult[i].price_in_cents / 100 + ".");
-				else
-					console.log(productResult[i].name + " " + productResult[i].package + " is priced at $" + productResult[i].price_in_cents / 100 + ".");				
-			}
+			// for (var i = 0; i < productResult.length; i++) {
+			// 	if (productResult[i].has_limited_time_offer)
+			// 		console.log(productResult[i].name + " " + productResult[i].package + " has a savings of $" + productResult[i].limited_time_offer_savings_in_cents / 100 +
+			// 		" and is priced at $" + productResult[i].price_in_cents / 100 + ".");
+			// 	else
+			// 		console.log(productResult[i].name + " " + productResult[i].package + " is priced at $" + productResult[i].price_in_cents / 100 + ".");				
+			// }
 		}
 
 		function ounceConvert(product) {
@@ -208,6 +197,6 @@ $(function() {
 			}
 		}
 		
-	})();
+	}();
 
 });
