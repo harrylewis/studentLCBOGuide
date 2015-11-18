@@ -94,8 +94,16 @@ $(function() {
 				for (var i = 0; i < products.result.length; i++) {
 					if (!products.result[i].is_dead)
 						resultArray.push({
-							name 					: products.result[i].name
-
+							name : products.result[i].name,
+							price : (products.result[i].price_in_cents) / 100,
+							package : products.result[i].package,
+							packageType : products.result[i].package_unit_type,
+							savings : (products.result[i].limited_time_offer_savings_in_cents) / 100,
+							saleEnd : products.result[i].limited_time_offer_ends_on,
+							category : products.result[i].primary_category,
+							volume : ounceConvert(products.result[i]),
+							description : products.result[i].serving_suggestion,
+							productUpdate : products.result[i].updated_at
 						});
 				}
 
@@ -131,8 +139,10 @@ $(function() {
 				// case three - 60 ounces
 				else if (ounces == 59 || ounces == 61)
 					ounces = 60;
-				console.log(ounces);
+				return ounces;
 			}
+			else
+				return product.volume_in_milliliters;
 		}
 
 		function opHours(store, day) {
