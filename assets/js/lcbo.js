@@ -68,7 +68,7 @@ $(function() {
 		}
 
 		function changeCurrentStore() {
-
+			
 		}
 
 		function scanProducts(closestStore, queryResult) {
@@ -96,8 +96,10 @@ $(function() {
 				});
 			}
 			else {
+				queryResult = queryResult.join(" ");
+
 				$.ajax({
-					url: urlPrefix + '/products?order=limited_time_offer_savings_in_cents.desc&store=' + closestStore.id + '&q=' + queryResult[0] + urlSuffix,
+					url: urlPrefix + '/products?order=limited_time_offer_savings_in_cents.desc&store=' + closestStore.id + '&q=' + queryResult + urlSuffix,
 					method: 'GET',
 					dataType: 'jsonp',
 					crossDomain: true
