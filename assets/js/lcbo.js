@@ -1,4 +1,5 @@
 $(function() {
+	'use strict';
 
 	// global app object
 	var SLCBOG = function() {
@@ -109,7 +110,7 @@ $(function() {
 						});
 				}
 
-				console.log(resultArray)
+				console.table(resultArray);
 
 				// print deals on the product search if any exist
 				printDeals(resultArray);
@@ -189,7 +190,7 @@ $(function() {
 			// check if there is a deal
 			if (product.has_limited_time_offer) {
 				// get expiration date and current date
-				parsedDate = product.limited_time_offer_ends_on.split('-');
+				var parsedDate = product.limited_time_offer_ends_on.split('-');
 				// create date based on when deal ends and modify time to closing time
 				var dealDate = new Date(parsedDate[0], parsedDate[1] - 1, parsedDate[2]);
 					dealDate.setHours(opHours(store, dealDate.getDay()).c.h);
