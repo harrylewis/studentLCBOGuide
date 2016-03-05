@@ -14,8 +14,6 @@ $(function() {
 		var currentStore;
 		// global variable to store results into an array
 		var resultArray = [];
-		// global variable to store deal results into an array
-		var dealArray = [];
 		// ajax object
 		// function ajaxObj = {
 		// 	url: urlPrefix + '/products?order=limited_time_offer_savings_in_cents.desc&store=' + closestStore.id + '&q=' + queryResult[0] + urlSuffix,
@@ -70,7 +68,6 @@ $(function() {
 				}
 				// set current store
 				currentStore = filteredStores[0];
-
 				// success
 				console.log("We found some stores!");
 
@@ -108,17 +105,21 @@ $(function() {
 				dataType: 'jsonp',
 				crossDomain: true
 			}).then(function(products) {
-				var d = timeRemainingForDeal(closestStore, products.result[0].limited_time_offer_ends_on);
-				console.log(d);
+				// var d = timeRemainingForDeal(closestStore, products.result[0].limited_time_offer_ends_on);
+				// console.log(d);
+
 				// clear previous results
 				resultArray = [];
 				// filter and create new product objects to display on page
 				for (var i = 0; i < products.result.length; i++) {
-					if (!products.result[i].is_dead)
+					if (!products.result[i].is_dead) {
+						if ((products.result[i].primary_category == 'Beer') && products.result[i].total_package_units == 1)
+							break;
 						resultArray.push({
 							name : products.result[i].name,
-							price : (products.result[i].price_in_cents) / 100,
+							price : parseFloat(Math.round(products.result[i].price_in_cents) /100).toFixed(2),
 							package : products.result[i].package,
+							units : products.result[i].total_package_units,
 							packageType : products.result[i].package_unit_type,
 							savings : (products.result[i].limited_time_offer_savings_in_cents) / 100,
 							saleEnd : timeRemainingForDeal(closestStore, products.result[i]),
@@ -127,26 +128,27 @@ $(function() {
 							description : products.result[i].serving_suggestion,
 							productUpdate : products.result[i].updated_at
 						});
+					}
 				}
-
+				// display the results in our console
 				console.log(resultArray);
 
-				// print deals on the product search if any exist
-				// printDeals(resultArray);
-
+				var template = $('#drinkTemplate').html();
+				var html = Mustache.to_html(template, {resultArray : resultArray});
+				$('.drinks').html(html);
 			});
-
+	
 		}
 
-		function printDeals(productResult) {
-			// for (var i = 0; i < productResult.length; i++) {
-			// 	if (productResult[i].has_limited_time_offer)
-			// 		console.log(productResult[i].name + " " + productResult[i].package + " has a savings of $" + productResult[i].limited_time_offer_savings_in_cents / 100 +
-			// 		" and is priced at $" + productResult[i].price_in_cents / 100 + ".");
-			// 	else
-			// 		console.log(productResult[i].name + " " + productResult[i].package + " is priced at $" + productResult[i].price_in_cents / 100 + ".");				
-			// }
-		}
+		// function printDeals(productResult) {
+		// 	for (var i = 0; i < productResult.length; i++) {
+		// 		if (productResult[i].has_limited_time_offer)
+		// 			console.log(productResult[i].name + " " + productResult[i].package + " has a savings of $" + productResult[i].limited_time_offer_savings_in_cents / 100 +
+		// 			" and is priced at $" + productResult[i].price_in_cents / 100 + ".");
+		// 		else
+		// 			console.log(productResult[i].name + " " + productResult[i].package + " is priced at $" + productResult[i].price_in_cents / 100 + ".");				
+		// 	}
+		// }
 
 		function ounceConvert(product) {
 			var ounces;
