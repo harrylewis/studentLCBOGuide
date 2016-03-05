@@ -12,13 +12,15 @@
     		 <script src="assets/js/lcbo.js"></script>
 		</head>
 		<body>
-			<div class="application">
+
+
+
+
+
+			<!-- <div class="application">
 				<header class="application__dboard">
 					<div class="dboard__container">
 						<div class="dboard__control">
-
-							<!-- <div id="map" class="application__map">
-							</div> -->
 
 							<div class="overlay"></div>
 
@@ -35,11 +37,46 @@
 							</form>
 							<p class="status">Loading your location</p>
 						</div>
-<!-- Get typin' so you can start drinkin' -->
+
 					</div>
 				</header>
 				<div class="drinks cf">
 				</div>
 			</div>
+
+
+			</div> -->
+
+			<div class="controls">
+				<div class="current-store cf">
+					<button class="current-store__location current-store__location--active">Barack & King</button>
+					<button class="current-store__location">Princess & Concession</button>
+					<button class="current-store__location">Division St. & John Counter Blvd.</button>
+					<!-- <span class="current-store__information">
+						<p class="current-store__information__store">You are currently searching at the <b>Barack & King</b> LCBO Location, which closes in 5 hours</p>
+					</span> -->
+					<!-- <span class="current-store__button"></span> -->
+				</div>
+				<form id="alcoholSearch" class="search cf">
+					<input type="text" id="searchProduct" class="search__field" placeholder="Start typin' so you can start drink'">
+					<input type="submit" class="search__submit" value="">
+				</form>
+
+			</div>
+
+			<div class="drinks cf"></div>
+
+						<script id="drinkTemplate" type="text/template">
+				{{#resultArray}}
+				<div id="boozeTemplate" class="booze">
+					<p class="booze__name">{{name}}</p>
+					<p class="booze__price">${{price}}</p>
+				</div>
+				{{/resultArray}}
+			</script>
+
+
+				
+<!-- Get typin' so you can start drinkin' -->
 		</body>
 	</html>

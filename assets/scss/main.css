@@ -111,8 +111,8 @@ table {
     -webkit-transform: translateY(0); } }
 
 body {
-  background: #F39C12;
   background: #1eaaf1;
+  background: #F39C12;
   font-size: 62.5%; }
 
 .application {
@@ -125,6 +125,77 @@ body {
   height: 100%;
   left: 0;
   z-index: -1; }
+
+.controls {
+  border: 2px solid #DA8300;
+  max-width: 96em;
+  margin: 6em auto;
+  border-radius: 4px;
+  background: white;
+  overflow: hidden; }
+
+.search {
+  border-top: 1px solid #e6ecf2; }
+
+.search__field {
+  font: 300 2.4em "Roboto";
+  padding: 0.75em 1em;
+  color: #1e283c;
+  display: inline-block;
+  width: calc(100% - 2.9em);
+  border: 0;
+  margin: 0;
+  background: transparent;
+  outline: none;
+  float: left; }
+  .search__field::-webkit-input-placeholder {
+    color: rgba(30, 40, 60, 0.4); }
+
+.search__submit {
+  display: inline-block;
+  font: 400 1.4em/1em "Roboto";
+  padding: 1em 0.75em;
+  background: #F39C12;
+  text-transform: uppercase;
+  border: 0;
+  width: 20%;
+  height: 4.2857em;
+  width: 4.2857em;
+  margin: 0.3em;
+  float: left;
+  outline: none;
+  border-radius: 4px; }
+
+.current-store__information {
+  display: block;
+  width: 75%;
+  padding: 1.4em 2.4em; }
+
+.current-store__location {
+  display: block;
+  background: white;
+  color: #aab4be;
+  border-radius: 4em;
+  font: 400 1.2em "Roboto";
+  text-transform: uppercase;
+  padding: 1em 2.333em;
+  margin: 0;
+  border: 0;
+  width: 33.33333%;
+  border-radius: 0;
+  float: left; }
+
+.current-store__location--active {
+  background: whitesmoke; }
+
+.current-store__information__store {
+  font: 400 1.4em "Roboto";
+  color: #aab4be; }
+
+.current-store__information__closing {
+  font: 400 1em "Roboto";
+  color: #aab4be;
+  text-transform: uppercase; }
 
 .application__dboard {
   position: fixed;
@@ -166,10 +237,6 @@ body {
   .booze-search__text::-webkit-input-placeholder {
     color: rgba(255, 255, 255, 0.4); }
 
-.stores {
-  display: block;
-  padding: 2em 0; }
-
 .stores__store {
   display: inline-block;
   font: 400 1em "Roboto";
@@ -202,7 +269,8 @@ body {
   max-width: 120em;
   margin: 0 auto;
   padding-bottom: 1.5em;
-  margin-top: 26.4em; }
+  border: 1px solid red;
+  border: 1px solid red; }
 
 .booze {
   width: 28em;
