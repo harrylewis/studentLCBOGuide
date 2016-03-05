@@ -65,12 +65,14 @@ body {
 		// align-items: center;
 		// border: 1px solid red;
 		position: relative;
+		border: 1px solid red;
 	}
 
 
 		.drink__container {
 			//border: 1px solid blue;
 			width: 100%;
+			border: 1px solid red;
 		}
 
 
@@ -140,3 +142,5 @@ body {
 					color: #F39C12;
 					font-weight: 600;
 				}
+
+	@import "_main--improved";

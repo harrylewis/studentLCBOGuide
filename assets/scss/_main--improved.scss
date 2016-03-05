@@ -1,0 +1,44 @@
+.lcbo__container {
+	border: 1px solid red;
+	padding: 0 2em;
+}
+
+
+	.lcbo__bounds {
+		border: 1px solid blue;
+		max-width: 100em;
+		margin: 2em auto;
+	}
+
+
+		.lcbo__dns {
+			width: calc(100% - 41em);
+			float: left;
+		}
+
+
+			.lcbo__dns__form {
+				border: 2px solid rgb(255,255,255);
+			}
+
+
+		.lcbo__location {
+			width: 40em;
+			float: left;
+			margin-left: 1em;
+
+			border: 2px solid rgb(255,255,255);
+			background: rgb(255,255,255);
+		}
+
+
+			.lcbo__location__info {
+				border: 1px solid blue;
+			}
+
+
+				.lcbo__location__info__distance {
+					border: 1px solid green;
+					font: 500 2em "Titillium Web";
+					color: rgb(30,40,60);
+				}
