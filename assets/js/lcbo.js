@@ -70,6 +70,7 @@ $(function() {
 				}
 				// set current store
 				currentStore = filteredStores[0];
+
 				// success
 				console.log("The stores have been found");
 			});
