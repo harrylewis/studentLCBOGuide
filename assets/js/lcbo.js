@@ -14,19 +14,9 @@ $(function() {
 		var currentStore;
 		// global variable to store results into an array
 		var resultArray = [];
-		// ajax object
-		// function ajaxObj = {
-		// 	url: urlPrefix + '/products?order=limited_time_offer_savings_in_cents.desc&store=' + closestStore.id + '&q=' + queryResult[0] + urlSuffix,
-		// 	method: 'GET',
-		// 	dataType: 'jsonp',
-		// 	crossDomain: true
-		// }
 		
 		// let's find out where you are
 		navigator.geolocation.getCurrentPosition(findStores);
-
-		// set up the app
-		$('.drink').height(window.innerHeight);
 
 		// handle searching for alcohol
 		$('#alcoholSearch').submit(function(e) {
@@ -35,20 +25,7 @@ $(function() {
 			scanProducts(currentStore, $('#searchProduct').val());
 		});
 
-		// fun input handling
-		// $('#searchProduct').keypress(function(e) {
-		// 	$(e.currentTarget)
-		// 		.removeClass('drink__search__input--typing')
-		// 		.addClass('drink__search__input--typing')
-		// 		.on('animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd', function(e) {
-		// 			$(e.currentTarget).removeClass('drink__search__input--typing');
-		// 		});
-		// })
-
 		function findStores(position) {
-			// loading finished
-			$('.drink__logo').removeClass('drink__logo--animate');
-			$('.drink').removeClass('drink--flex');
 			// set the coordinates
 			latitude = position.coords.latitude;
 			longitude = position.coords.longitude;
@@ -72,22 +49,22 @@ $(function() {
 				console.log("We found some stores!");
 
 				// now we can initialize our map
-				var map = new google.maps.Map(document.getElementById('map'), {
-          			zoom: 15,
-          			center: {lat: latitude, lng: longitude},
-          		});
+				// var map = new google.maps.Map(document.getElementById('map'), {
+    //       			zoom: 15,
+    //       			center: {lat: latitude, lng: longitude},
+    //       		});
 
-          		var userMarker = new google.maps.Marker({
-          			position: {lat: latitude, lng: longitude},
-          			map: map,
-          			title: 'User Location'
-          		});
+    //       		var userMarker = new google.maps.Marker({
+    //       			position: {lat: latitude, lng: longitude},
+    //       			map: map,
+    //       			title: 'User Location'
+    //       		});
 
-          		var storeMarker = new google.maps.Marker({
-          			position: {lat: currentStore.latitude, lng: currentStore.longitude},
-          			map: map,
-          			title: 'Store Location'
-          		});
+    //       		var storeMarker = new google.maps.Marker({
+    //       			position: {lat: currentStore.latitude, lng: currentStore.longitude},
+    //       			map: map,
+    //       			title: 'Store Location'
+    //       		});
 			});
 		}
 
@@ -100,24 +77,20 @@ $(function() {
 			queryResult = queryResult.split(" ");
 			// get all of the products
 			$.ajax({
-				url: urlPrefix + '/products?order=limited_time_offer_savings_in_cents.desc&store=' + closestStore.id + '&q=' + queryResult[0] + urlSuffix,
+				url: urlPrefix + '/products?sort=limited_time_offer_savings_in_cents.desc,total_package_units.desc&store=' + closestStore.id + '&q=' + queryResult[0] + urlSuffix,
 				method: 'GET',
 				dataType: 'jsonp',
 				crossDomain: true
 			}).then(function(products) {
-				// var d = timeRemainingForDeal(closestStore, products.result[0].limited_time_offer_ends_on);
-				// console.log(d);
-
 				// clear previous results
 				resultArray = [];
 				// filter and create new product objects to display on page
 				for (var i = 0; i < products.result.length; i++) {
 					if (!products.result[i].is_dead) {
-						if ((products.result[i].primary_category == 'Beer') && products.result[i].total_package_units == 1)
-							break;
 						resultArray.push({
 							name : products.result[i].name,
-							price : parseFloat(Math.round(products.result[i].price_in_cents) /100).toFixed(2),
+							content: (products.result[i].alcohol_content / 100) + '%',
+							price : parseFloat(Math.round(products.result[i].price_in_cents) / 100).toFixed(2),
 							package : products.result[i].package,
 							units : products.result[i].total_package_units,
 							packageType : products.result[i].package_unit_type,
@@ -139,16 +112,6 @@ $(function() {
 			});
 	
 		}
-
-		// function printDeals(productResult) {
-		// 	for (var i = 0; i < productResult.length; i++) {
-		// 		if (productResult[i].has_limited_time_offer)
-		// 			console.log(productResult[i].name + " " + productResult[i].package + " has a savings of $" + productResult[i].limited_time_offer_savings_in_cents / 100 +
-		// 			" and is priced at $" + productResult[i].price_in_cents / 100 + ".");
-		// 		else
-		// 			console.log(productResult[i].name + " " + productResult[i].package + " is priced at $" + productResult[i].price_in_cents / 100 + ".");				
-		// 	}
-		// }
 
 		function ounceConvert(product) {
 			var ounces;
