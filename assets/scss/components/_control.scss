@@ -2,6 +2,49 @@
 // -------
 
 
+
+.introduction {
+	max-width: 20em;
+	margin: 4em auto;
+	text-align: center;
+		font: 500 2.4em/1.2em "Titillium Web";
+		color: rgb(255,255,255);
+}
+
+
+	.introduction__text {
+		font: 500 2em/1.2em "Titillium Web";
+		color: rgb(255,255,255);
+		display: inline-block;
+	}
+
+
+.locations {
+	background: rgb(255,255,255);
+	border-bottom: 1px solid rgb(240,240,240);
+}
+
+
+
+
+
+	.introduction__option {
+		display: inline-block;
+		font: 700 2em/1.2em "Titillium Web";
+		color: rgb(30,40,60);
+		-webkit-appearance: none;
+		border: 0;
+		border-bottom: 2px dashed rgb(220,230,240);
+		background: transparent;
+		outline: none;
+		border-radius: 0;
+
+		option {
+			font-weight: 400;
+		}
+
+	}
+
 .controls {
 	border: 2px solid #DA8300;
 	//border: 2px solid rgba(240,240,240,0.5);
@@ -200,7 +243,7 @@
 
 
 .drinks {
-	max-width: 120em;
+	max-width: 96em;
 	margin: 0 auto;
 	padding-bottom: 1.5em;
 }
@@ -247,7 +290,9 @@
 
 
 .location {
-	margin: 10em auto;
+	margin: 0 auto;
+	margin-top: 2em;
+	margin-bottom: 4em;
 	width: 40em;
 	border-radius: 10em;
 	background: #CD7600;
@@ -259,9 +304,14 @@
 	max-width: 96em;
 	margin: 0 auto;
 	border-radius: 4px;
-	padding: 1em 2em;
 	background: rgb(255,255,255);
+	overflow: hidden;
 }
+
+
+	.find__search {
+		padding: 1em 2em;
+	}
 
 
 	.find__opening {
@@ -277,10 +327,10 @@
 		color: rgb(30,40,60);
 		-webkit-appearance: none;
 		border: 0;
-		border-bottom: 2px dashed rgb(230,240,250);
+		border-bottom: 2px dashed rgb(220,230,240);
 		background: transparent;
 		outline: none;
-		border-radius: none;
+		border-radius: 0;
 
 		option {
 			font-weight: 400;
@@ -313,7 +363,7 @@
 		display: inline-block;
 		padding: 0.3em 1em;
 		border: 0;
-		border-bottom: 2px solid rgba(230,240,250,1);
+		border-bottom: 2px solid rgba(220,230,240,1);
 		background: transparent;
 		outline: none;
 		border-radius: 4px;
@@ -323,3 +373,71 @@
 		margin-left: 0.5em;
 	}
 
+
+.loc {
+	display: block;
+	width: 33.33333%;
+	float: left;
+	padding: 1em 2em;
+	background: transparent;
+	border: 0;
+	border-right: 1px solid rgb(245,245,245);
+
+	&:last-of-type {
+		border-right: none;
+	}
+
+}
+
+.beverage {
+	width: calc(50% - 2em);
+	margin: 1em 1em;
+	float: left;
+	border: 1px solid red;
+}
+
+
+.loc--active {
+	background: rgb(245,245,245);
+}
+
+
+	.loc__i {
+		font-family: 400 1em "icomoon";
+
+		&:before {
+			content: "\e8b4";
+		}
+
+	}
+
+
+
+		.loc__id {
+			display: block;
+			text-align: left;
+		}
+
+
+			.loc__name {
+				font: 500 1.2em/1.2em "Titillium Web";
+				color: rgb(140,144,148);
+				text-transform: uppercase;
+			}
+
+
+			.loc__hours {
+				font: 700 1em "Titillium Web";
+				color: rgb(140,144,148);
+				text-transform: uppercase;
+			}
+
+
+			// .loc__hours--time {
+			// 	color: #3498db;
+			// }
+
+
+			// .loc__hours--no-time {
+			// 	color: #e74c3c;
+			// }

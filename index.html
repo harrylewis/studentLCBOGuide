@@ -47,21 +47,53 @@
 
 			</div> -->
 
-			<div class="location"></div>
+
+			<h1 class="introduction">
+				Student LCBO guide, a service that helps you, <b>a poor and helpless
+				student</b>, find the most bang for your buck, at the nearest LCBO store.
+			</h1>
+
+			<!-- <div class="location"></div> -->
 
 			<header class="find cf">
-				<p class="find__opening">I'm looking to get &nbsp;</p>
-				<select class="find__option">
-					<option value="tipsy">tipsy</option>
-					<option value="buzzed">buzzed</option>
-					<option value="fully lit">fully lit</option>
-					<option value="afkahsjfk">afkahsjfk</option>
-				</select>
-				<p class="find__opening">, find me some &nbsp;</p>
-				<form class="find__form" id="alcoholSearch">
-					<input type="text" class="find__field" id="searchProduct">
-					<input type="submit" class="find__submit" value="Get Drinks">
-				</form>
+
+				<div class="locations cf">
+					<button class="loc loc--active">
+						<!-- <i class="loc__i"></i> -->
+						<span class="loc__id">
+							<p class="loc__name">Barack & King</p>
+							<p class="loc__hours loc__hours--time">Closes in 5 Hours</p>
+						</span>
+					</button>
+					<button class="loc">
+						<!-- <i class="loc__i"></i> -->
+						<span class="loc__id">
+							<p class="loc__name">Princess & Concession</p>
+							<p class="loc__hours loc__hours--no-time">Closes in 5 Minutes</p>
+						</span>
+					</button>
+					<button class="loc">
+						<!-- <i class="loc__i"></i> -->
+						<span class="loc__id">
+							<p class="loc__name">Division St. & John Counter Blvd.</p>
+							<p class="loc__hours loc__hours--time">Closes in 5 Hours</p>
+						</span>
+					</button>
+				</div>
+				<div class="find__search">
+					<p class="find__opening">I'm looking to get &nbsp;</p>
+					<select class="find__option">
+						<option value="tipsy">tipsy</option>
+						<option value="buzzed">buzzed</option>
+						<option value="fully lit">fully lit</option>
+						<option value="afkahsjfk">afkahsjfk</option>
+					</select>
+					<p class="find__opening">&nbsp; find me some &nbsp;</p>
+					<form class="find__form" id="alcoholSearch">
+						<input type="text" class="find__field" id="searchProduct" autocomplete="off">
+						<input type="submit" class="find__submit" value="Get Drinks">
+					</form>
+				</div>
 				
 			</header>
 
@@ -86,7 +118,7 @@
 
 			<script id="drinkTemplate" type="text/template">
 				{{#resultArray}}
-					<article class="booze">
+					<article class="beverage">
 						<div class="booze__product cf">
 							<p class="booze__product__name">{{ name }}</p>
 							<p class="booze__product__quantity">{{ package }}</p>
