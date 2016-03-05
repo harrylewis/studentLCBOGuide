@@ -123,14 +123,18 @@ body {
   width: 100%;
   position: absolute;
   height: 100%;
-  left: 0; }
+  left: 0;
+  z-index: -1; }
 
 .application__dboard {
-  position: relative;
+  position: fixed;
   top: 0;
   width: 100%;
   background: #1eaaf1;
   box-shadow: 0px 1px 1px rgba(60, 60, 60, 0.25); }
+
+.dboard__container {
+  position: relative; }
 
 .dboard__buffer {
   display: block;
@@ -163,11 +167,12 @@ body {
     color: rgba(255, 255, 255, 0.4); }
 
 .stores {
-  display: block; }
+  display: block;
+  padding: 2em 0; }
 
 .stores__store {
   display: inline-block;
-  font: 400 1.2em "Roboto";
+  font: 400 1em "Roboto";
   color: white;
   background: transparent;
   text-transform: uppercase;
@@ -177,7 +182,7 @@ body {
   outline: 0;
   margin-right: 1em;
   background: rgba(255, 255, 255, 0.06125);
-  border-radius: 0 0 4px 4px;
+  border-radius: 20px;
   -webkit-transition: -webkit-transform 0.3s;
   -moz-transition: -webkit-transform 0.3s;
   -ms-transition: -webkit-transform 0.3s;
@@ -192,3 +197,31 @@ body {
   font: 400 1.4em "Roboto";
   color: rgba(255, 255, 255, 0.75);
   padding: 2em 0 1em 0; }
+
+.drinks {
+  max-width: 120em;
+  margin: 0 auto;
+  padding-bottom: 1.5em;
+  margin-top: 26.4em; }
+
+.booze {
+  width: 28em;
+  height: 28em;
+  margin: 2em 1em 0 1em;
+  float: left;
+  background: #dce2e8; }
+
+.booze__name {
+  font: 300 1.6em "Roboto";
+  color: #1e283c;
+  padding: 0.5em 1em; }
+
+.booze__price {
+  height: 4em;
+  width: 4em;
+  border-radius: 5em;
+  text-align: center;
+  margin: 0.7em auto 1.5em auto;
+  background: #F39C12;
+  font: 300 4em/4em "Roboto";
+  color: white; }
