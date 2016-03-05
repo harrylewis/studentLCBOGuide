@@ -72,7 +72,25 @@ $(function() {
 				currentStore = filteredStores[0];
 
 				// success
-				console.log("The stores have been found");
+				console.log("We found some stores!");
+
+				// now we can initialize our map
+				var map = new google.maps.Map(document.getElementById('map'), {
+          			zoom: 15,
+          			center: {lat: latitude, lng: longitude},
+          		});
+
+          		var userMarker = new google.maps.Marker({
+          			position: {lat: latitude, lng: longitude},
+          			map: map,
+          			title: 'User Location'
+          		});
+
+          		var storeMarker = new google.maps.Marker({
+          			position: {lat: currentStore.latitude, lng: currentStore.longitude},
+          			map: map,
+          			title: 'Store Location'
+          		});
 			});
 		}
 
@@ -111,10 +129,10 @@ $(function() {
 						});
 				}
 
-				console.table(resultArray);
+				console.log(resultArray);
 
 				// print deals on the product search if any exist
-				printDeals(resultArray);
+				// printDeals(resultArray);
 
 			});
 
