@@ -1,0 +1,26 @@
+// ANIMATIONS
+// ----------
+
+@-webkit-keyframes searchTyping {
+	0% { background: #F39C12; }
+	35% { background: #DF8800; }
+	100% { background: #F39C12; }
+}
+
+@-webkit-keyframes cocktailShakerOrientRight {
+	7.5% { -webkit-transform: translateY(10%) translateX(-5.454545%) rotate(20deg); }
+	15% { -webkit-transform: translateY(-10%) translateX(5.454545%) rotate(20deg); }
+	22.5% { -webkit-transform: translateY(10%) translateX(-5.454545%) rotate(20deg); }
+	30% { -webkit-transform: translateY(-10%) translateX(5.454545%) rotate(20deg); }
+	37.5% { -webkit-transform: translateY(10%) translateX(-5.454545%) rotate(20deg); }
+	45% { -webkit-transform: translateY(0) translateX(0) rotate(20deg); }
+}
+
+@-webkit-keyframes cocktailShakerOrientStraight {
+	7.5% { -webkit-transform: translateY(10%); }
+	15% { -webkit-transform: translateY(-10%); }
+	22.5% { -webkit-transform: translateY(10%); }
+	30% { -webkit-transform: translateY(-10%); }
+	37.5% { -webkit-transform: translateY(10%); }
+	45% { -webkit-transform: translateY(0); }
+}
