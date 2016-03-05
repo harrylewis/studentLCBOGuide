@@ -47,31 +47,54 @@
 
 			</div> -->
 
-			<div class="controls">
-				<div class="current-store cf">
-					<button class="current-store__location current-store__location--active">Barack & King</button>
+			<div class="location"></div>
+
+			<header class="find cf">
+				<p class="find__opening">I'm looking to get &nbsp;</p>
+				<select class="find__option">
+					<option value="tipsy">tipsy</option>
+					<option value="buzzed">buzzed</option>
+					<option value="fully lit">fully lit</option>
+					<option value="afkahsjfk">afkahsjfk</option>
+				</select>
+				<p class="find__opening">, find me some &nbsp;</p>
+				<form class="find__form" id="alcoholSearch">
+					<input type="text" class="find__field" id="searchProduct">
+					<input type="submit" class="find__submit" value="Get Drinks">
+				</form>
+				
+			</header>
+
+			<!-- <div class="controls"> -->
+				<!-- <div class="current-store cf"> -->
+					<!-- <button class="current-store__location current-store__location--active">Barack & King</button>
 					<button class="current-store__location">Princess & Concession</button>
-					<button class="current-store__location">Division St. & John Counter Blvd.</button>
+					<button class="current-store__location">Division St. & John Counter Blvd.</button> -->
 					<!-- <span class="current-store__information">
 						<p class="current-store__information__store">You are currently searching at the <b>Barack & King</b> LCBO Location, which closes in 5 hours</p>
 					</span> -->
 					<!-- <span class="current-store__button"></span> -->
-				</div>
-				<form id="alcoholSearch" class="search cf">
+				<!-- </div> -->
+				<!-- <form id="alcoholSearch" class="search cf">
 					<input type="text" id="searchProduct" class="search__field" placeholder="Start typin' so you can start drink'">
 					<input type="submit" class="search__submit" value="">
-				</form>
+				</form> -->
 
-			</div>
+			<!-- </div> -->
 
 			<div class="drinks cf"></div>
 
-						<script id="drinkTemplate" type="text/template">
+			<script id="drinkTemplate" type="text/template">
 				{{#resultArray}}
-				<div id="boozeTemplate" class="booze">
-					<p class="booze__name">{{name}}</p>
-					<p class="booze__price">${{price}}</p>
-				</div>
+					<article class="booze">
+						<div class="booze__product cf">
+							<p class="booze__product__name">{{ name }}</p>
+							<p class="booze__product__quantity">{{ package }}</p>
+						</div>
+						<div class="booze__price"></div>
+						<!-- <p class="booze__name">{{name}}</p> -->
+						<!-- <p class="booze__price">${{price}}</p> -->
+					</article>
 				{{/resultArray}}
 			</script>
 
