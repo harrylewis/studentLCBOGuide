@@ -175,34 +175,3 @@ body {
   background: white;
   color: #F39C12;
   font-weight: 600; }
-
-.lcbo__container {
-  border: 1px solid red;
-  padding: 0 2em; }
-
-.lcbo__bounds {
-  border: 1px solid blue;
-  max-width: 100em;
-  margin: 2em auto; }
-
-.lcbo__dns {
-  width: calc(100% - 41em);
-  float: left; }
-
-.lcbo__dns__form {
-  border: 2px solid white; }
-
-.lcbo__location {
-  width: 40em;
-  float: left;
-  margin-left: 1em;
-  border: 2px solid white;
-  background: white; }
-
-.lcbo__location__info {
-  border: 1px solid blue; }
-
-.lcbo__location__info__distance {
-  border: 1px solid green;
-  font: 500 2em "Titillium Web";
-  color: #1e283c; }
