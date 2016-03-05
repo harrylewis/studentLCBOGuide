@@ -13,38 +13,43 @@
 		</head>
 		<body>
 
-			<div id="map" style="display:block;width:70%;float:left;height:60em;background:rgb(37,23,244)">
-			</div>
+			<div class="application">
 
-			<div class="app">
+				
 
-			</div>
+				<header class="application__dboard">
 
-			<div class="lcbo__container">
-				<div class="lcbo__bounds cf">
+					<div class="dboard__container">
 
-					<!-- dns - drink and search -->
-					<section class="lcbo__dns">
-						<form class="lcbo__dns__form"></form>
-					</section>
 
-					<!-- location -->
-					<section class="lcbo__location"></section>
+							
 
-				</div>
-			</div>
 
-			<div class="drink">
-				<div class="drink__container">
-					<section class="drink__status">
-						<img class="drink__logo drink__logo--animate" src="assets/images/cocktail-shaker.svg">
-					</section>
-					<form id="alcoholSearch" class="drink__search drink__search--hidden cf">
-						<input id="searchProduct" class="drink__search__input" type="text" placeholder="What do you want to drink?" autofocus autocomplete="off">
-						<input type="submit" class="drink__search__submit" value="Find Drinks">
-					</form>
-				</div>
-			</div>
 
+						<div class="dboard__control">
+
+							<div id="map" class="application__map">
+							</div>
+
+							<!-- <span class="stores">
+								<button class="stores__store stores__store--active">Barack & King</button>
+								<button class="stores__store">Princess & Concession</button>
+								<button class="stores__store">Division St. & John Counter Bvd.</button>
+							</span> -->
+
+							<span class="dboard__buffer"></span>
+
+							<form class="booze-search">
+								<input type="text" placeholder="Hol' up" class="booze-search__text">
+							</form>
+							<p class="status">Loading your location</p>
+						</div>
+
+						
+
+
+<!-- Get typin' so you can start drinkin' -->
+					</div>
+				</header>
 		</body>
 	</html>
