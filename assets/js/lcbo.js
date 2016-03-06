@@ -164,10 +164,12 @@ $(function() {
 			// split queryResult into an array
 			queryResult = queryResult.split(" ");
 			// how lit are we getting tonight?
-			litLevel = $('#turntLevel').val();
-			if (litLevel == "tipsy")
+			litLevel = $('.find__option').val();
+			if (litLevel == "money")
 				litParameter = 'sort=limited_time_offer_savings_in_cents.desc,total_package_units.desc';
-			if (litLevel == "fully lit")
+			if (litLevel == "fresh")
+				litParameter = 'order=released_on.desc';
+			if (litLevel == "decimated")
 				litParameter = 'order=alcohol_content.desc';
 
 			// get all of the products
@@ -189,12 +191,20 @@ $(function() {
 							package : parsePackage(products.result[i]),
 							units : products.result[i].total_package_units,
 							packageType : products.result[i].package_unit_type,
-							savings : (products.result[i].limited_time_offer_savings_in_cents) / 100,
+							saveLogic: (function() {
+								if (!products.result[i].has_limited_time_offer)
+									return false;
+								else
+									return true;
+							})(),
+							savings : parseFloat(Math.round(products.result[i].limited_time_offer_savings_in_cents) / 100).toFixed(2),
 							saleEnd : timeRemainingForDeal(closestStore, products.result[i]),
 							category : products.result[i].primary_category,
 							volume : ounceConvert(products.result[i]),
 							description : products.result[i].serving_suggestion,
-							productUpdate : products.result[i].updated_at
+							tags: products.result[i].tags,
+							productUpdate : products.result[i].updated_at,
+							releaseDate : products.result[i].released_on
 						});
 					}
 				}

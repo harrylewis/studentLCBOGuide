@@ -109,9 +109,9 @@
 				<div class="find__search">
 					<p class="find__opening">I'm looking &nbsp;</p>
 					<select class="find__option">
-						<option value="standard">to unwind</option>
-						<option value="skrilla">to save money</option>
-						<option value="fully lit">to be a liability</option>
+						<option value="money">to save money</option>
+						<option value="fresh">for something fresh</option>
+						<option value="decimated">to be a liability</option>
 					</select>
 					<p class="find__opening">&nbsp; find me some &nbsp;</p>
 					<form class="find__form" id="alcoholSearch">
@@ -131,11 +131,11 @@
 						<p class="beverage__name">{{ name }}</p>
 						<div class="beverage__statistics">
 							<span class="beverage__statistic">
-								<p class="beverage__statistic__number">${{ price }}</p>
+								<p class="beverage__statistic__number">${{price}} {{#saveLogic}}(${{savings}}){{/saveLogic}}</p>
 								<p class="beverage__statistic__cat">Price (CAD)</p>
 							</span>
 							<span class="beverage__statistic">
-								<p class="beverage__statistic__number">{{ units }}</p>
+								<p class="beverage__statistic__number">{{units}}</p>
 								<p class="beverage__statistic__cat">{{ package }}</p>
 							</span>
 							<span class="beverage__statistic">
