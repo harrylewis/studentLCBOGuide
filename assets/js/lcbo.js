@@ -24,12 +24,16 @@ $(function() {
 						 "Jody Santos", "Karl Jones", "Edna Sharp", "Miguel O'Brien",
 						 "Gertrude Thornton", "Muriel Wells", "Angelina Welch", "Tammy James",
 						 "Gregory Stokes", "Valerie Guzman", "Beth Franklin", "Pedro Sparks"];
+		// realtime drink ids
+		var realtimeDrinkIDs = [];
 		
 		// let's listen for other people
 		var drinksRef = new Firebase("https://liquorcabinet.firebaseIO.com/drinks");
 		// appending the results
 		drinksRef.limitToLast(1).on("child_added", function(snap) {
-			getRealTime(snap.val().drinkName, snap.val().latitude, snap.val().longitude);
+			// check if already yours
+			if (!(snap.val().longitude - longitude == 0 && snap.val().latitude - latitude == 0))
+				getRealTime(snap.val().drinkName, snap.val().latitude, snap.val().longitude);
 		});
 
 		// let's find out where you are
