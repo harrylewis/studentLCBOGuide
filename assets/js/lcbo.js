@@ -5,7 +5,7 @@ $(function() {
 	var SLCBOG = function() {
 		// API URL prefix and suffix
 		var urlPrefix = 'https://lcboapi.com/';
-		var urlSuffix = '&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk';
+		var urlSuffix = '&access_key=MDphYTgyYjVmZS1lMzdiLTExZTUtYWMxNy0yYjI2MzNiNzI2YmU6Z2xWbkdpeTlVQmEzTVRYUlpzWWhZUVRkZllmNnZhYzJWNnZ1';
 		// global firebase reference
 		var ref;
 		// what page are we on?
