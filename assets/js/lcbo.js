@@ -55,6 +55,30 @@ $(function() {
 			});
 		});
 
+		$('.loc').click(function(e) {
+			e.preventDefault();
+			$(e.currentTarget)
+				.addClass('loc--active')
+				.siblings('.loc')
+					.removeClass('loc--active');
+			for (var i = 0; i < filteredStores.length; i++) {
+				if ($(e.currentTarget).text().toLowerCase() == filteredStores[i].name.toLowerCase()) {
+					currentStore = filteredStores[i];
+					break;
+				}
+			}
+			currentPage = 1;
+			if ($('#searchProduct').val()) {
+				scanProducts(currentStore, $('#searchProduct').val(), prepQuery($('#searchProduct').val()), currentPage);
+				var drinksRef = ref.child("drinks");
+				drinksRef.push().set({
+					drinkName: $('#searchProduct').val(),
+					latitude: latitude,
+					longitude: longitude
+				});
+			}
+		});
+
 		function findStores(position) {
 			// set the coordinates
 			latitude = position.coords.latitude;
@@ -166,8 +190,6 @@ $(function() {
 		function prepQuery(queryResult) {
 			var searchFilter;
 			var searchParameters;
-			// split result into an array
-			queryResult = queryResult.split(" ");
 			// find our filter parameter
 			searchFilter = $('.find__option').val();
 			// assign the associated parameters
@@ -183,8 +205,10 @@ $(function() {
 
 		function scanProducts(closestStore, queryResult, filter, page) {
 			// make our ajax call
+			console.log(queryResult);
+
 			$.ajax({
-				url: urlPrefix + '/products?' + filter + '&store=' + closestStore.id + '&q=' + queryResult[0] + urlSuffix + "&page=" + page,
+				url: urlPrefix + '/products?' + filter + '&store=' + closestStore.id + '&q=' + queryResult + urlSuffix + "&page=" + page,
 				method: 'GET',
 				dataType: 'jsonp',
 				crossDomain: true
