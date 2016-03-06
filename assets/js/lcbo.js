@@ -6,9 +6,11 @@ $(function() {
 		// API URL prefix and suffix
 		var urlPrefix = 'https://lcboapi.com/';
 		var urlSuffix = '&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk';
+		// global firebase reference
+		var ref;
 		// coords for geolocation
-		var latitude;
-		var longitude;
+		var latitude = 0;
+		var longitude = 0;
 		// global variable to access nearest stores to user
 		var filteredStores = [];
 		var currentStore;
@@ -27,12 +29,27 @@ $(function() {
 			e.preventDefault();
 			// find deals from the current store and a searched value
 			scanProducts(currentStore, $('#searchProduct').val());
+			var drinksRef = ref.child("drinks");
+			drinksRef.push().set({
+				drinkName: $('#searchProduct').val(),
+				latitude: latitude,
+				longitude: longitude
+			});
 		});
 
 		function findStores(position) {
 			// set the coordinates
 			latitude = position.coords.latitude;
 			longitude = position.coords.longitude;
+			// set our Firebase reference
+			ref = new Firebase("https://liquorcabinet.firebaseIO.com");
+			// let's listen for other people
+			var drinksRef = new Firebase("https://liquorcabinet.firebaseIO.com/drinks");
+
+			drinksRef.limitToLast(1).on("child_added", function(snap) {
+				console.log(snap.val().drinkName);
+			});
+
 			// a 5000m radius (as the crow flies) for filtering stores
 			var maxRadius = 5000;
 			// GET stores
@@ -148,8 +165,7 @@ $(function() {
 		function parsePackage(product) {
 			var productSplit;
 			if (product.total_package_units > 1) {
-				productSplit = product.package.split("x")[1] + "S";
-				console.log(productSplit);
+				productSplit = product.package.split("x")[1] + "s";
 				return productSplit;
 			}
 			return product.package;
