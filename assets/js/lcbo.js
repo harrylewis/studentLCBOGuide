@@ -14,6 +14,10 @@ $(function() {
 		var currentStore;
 		// global variable to store results into an array
 		var resultArray = [];
+		// how weird are things getting tonight?
+		var litLevel;
+		// let's search for some fun stuff
+		var litParameter;
 		
 		// let's find out where you are
 		navigator.geolocation.getCurrentPosition(findStores);
@@ -75,9 +79,18 @@ $(function() {
 		function scanProducts(closestStore, queryResult) {
 			// split queryResult into an array
 			queryResult = queryResult.split(" ");
+			// how lit are we getting tonight?
+			litLevel = $('#turntLevel').val();
+			if (litLevel == "tipsy")
+				litParameter = 'sort=limited_time_offer_savings_in_cents.desc,total_package_units.desc';
+			if (litLevel == "fully lit") {
+				litParameter = 'order=alcohol_content.desc';
+				console.log("Hello");
+			}
+
 			// get all of the products
 			$.ajax({
-				url: urlPrefix + '/products?sort=limited_time_offer_savings_in_cents.desc,total_package_units.desc&store=' + closestStore.id + '&q=' + queryResult[0] + urlSuffix,
+				url: urlPrefix + '/products?' + litParameter + '&store=' + closestStore.id + '&q=' + queryResult[0] + urlSuffix,
 				method: 'GET',
 				dataType: 'jsonp',
 				crossDomain: true
