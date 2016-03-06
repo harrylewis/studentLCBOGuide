@@ -29,8 +29,7 @@ $(function() {
 		var drinksRef = new Firebase("https://liquorcabinet.firebaseIO.com/drinks");
 		// appending the results
 		drinksRef.limitToLast(1).on("child_added", function(snap) {
-			console.log(snap.val().drinkName);
-			displayRealTime(snap.val().drinkName, findCity(snap.val().latitude, snap.val().longitude), nameArray[Math.floor(Math.random() * nameArray.length)]);
+			getRealTime(snap.val().drinkName, snap.val().latitude, snap.val().longitude);
 		});
 
 		// let's find out where you are
@@ -104,7 +103,7 @@ $(function() {
 			});
 		}
 
-		function findCity(latitude, longitude) {
+		function getRealTime(drink, latitude, longitude) {
 			var geocoder = new google.maps.Geocoder;
 			var location;
 			var latlng = { lat: latitude, lng: longitude };
@@ -117,12 +116,40 @@ $(function() {
 					else {
 						location = "Outer Space";
 					}
+					displayRealTime(drink, location, nameArray[Math.floor(Math.random() * nameArray.length)]);
 				}
 			});
 		}
 
 		function displayRealTime(drink, city, name) {
-
+			$('.firebase__ticker__flipper').toggleClass('firebase__ticker__flipper--transform');
+			// name
+			if ($('[data-name="name"]').attr('data-active') == '0')
+				$('[data-name="name"]')
+					.attr('data-active', 1)
+					.children('.firebase__ticker__flipper').children('.firebase__ticker__flipper__back').text(name);
+			else
+				$('[data-name="name"]')
+					.attr('data-active', 0)
+					.children('.firebase__ticker__flipper').children('.firebase__ticker__flipper__front').text(name);
+			// city
+			if ($('[data-name="city"]').attr('data-active') == '0')
+				$('[data-name="city"]')
+					.attr('data-active', 1)
+					.children('.firebase__ticker__flipper').children('.firebase__ticker__flipper__back').text(city);
+			else
+				$('[data-name="city"]')
+					.attr('data-active', 0)
+					.children('.firebase__ticker__flipper').children('.firebase__ticker__flipper__front').text(city);
+			// drink
+			if ($('[data-name="drink"]').attr('data-active') == '0')
+				$('[data-name="drink"]')
+					.attr('data-active', 1)
+					.children('.firebase__ticker__flipper').children('.firebase__ticker__flipper__back').text(drink);
+			else
+				$('[data-name="drink"]')
+					.attr('data-active', 0)
+					.children('.firebase__ticker__flipper').children('.firebase__ticker__flipper__front').text(drink);
 		}
 
 		function changeCurrentStore() {
