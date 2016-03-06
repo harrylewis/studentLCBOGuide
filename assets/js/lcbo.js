@@ -148,7 +148,7 @@ $(function() {
 		function parsePackage(product) {
 			var productSplit;
 			if (product.total_package_units > 1) {
-				productSplit = product.package.split("x")[1];
+				productSplit = product.package.split("x")[1] + "S";
 				console.log(productSplit);
 				return productSplit;
 			}
