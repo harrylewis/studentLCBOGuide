@@ -1,5 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,900,700,600,300,200);
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,100);
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,700,300);
 @import url(https://fonts.googleapis.com/css?family=Pacifico);
 @import url(https://fonts.googleapis.com/css?family=Quicksand:400,700);
 html, body, div, span, applet, object, iframe,
@@ -63,10 +62,6 @@ table {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
-
-@font-face {
-  font-family: "icomoon";
-  src: url("../icomoon/fonts/icomoon.ttf"), url("../icomoon/fonts/icomoon.eot"), url("../icomoon/fonts/icomoon.svg"), url("../icomoon/fonts/icomoon.woff"); }
 
 @-webkit-keyframes searchTyping {
   0% {
@@ -161,7 +156,7 @@ body {
 .firebase {
   margin: 0 auto;
   margin-bottom: 2.5em;
-  max-width: 80em;
+  max-width: 96em;
   text-align: center; }
 
 .firebase__ticker {
@@ -171,7 +166,7 @@ body {
   display: inline-block;
   position: relative;
   height: 2em;
-  width: 10em;
+  width: 12em;
   -webkit-perspective: 500;
   margin-bottom: -0.75em; }
 
@@ -232,38 +227,6 @@ body {
   border-radius: 4px;
   background: white;
   overflow: hidden; }
-
-.search {
-  border-top: 1px solid #e6ecf2; }
-
-.search__field {
-  font: 300 2.4em "Roboto";
-  padding: 0.75em 1em;
-  color: #1e283c;
-  display: inline-block;
-  width: calc(100% - 2.9em);
-  border: 0;
-  margin: 0;
-  background: transparent;
-  outline: none;
-  float: left; }
-  .search__field::-webkit-input-placeholder {
-    color: rgba(30, 40, 60, 0.4); }
-
-.search__submit {
-  display: inline-block;
-  font: 400 1.4em/1em "Roboto";
-  padding: 1em 0.75em;
-  background: #F39C12;
-  text-transform: uppercase;
-  border: 0;
-  width: 20%;
-  height: 4.2857em;
-  width: 4.2857em;
-  margin: 0.3em;
-  float: left;
-  outline: none;
-  border-radius: 4px; }
 
 .current-store__information {
   display: block;
@@ -417,51 +380,50 @@ body {
   background: white;
   overflow: hidden; }
 
-.find__search {
+.search {
   padding: 1em 2em; }
 
-.find__opening {
+.search__form__opening {
   font: 300 2.2em "Titillium Web";
   color: #1e283c;
   display: inline-block; }
 
-.find__option {
+.search__form__option {
   display: inline-block;
   font: 700 2.2em "Titillium Web";
   color: #1e283c;
   -webkit-appearance: none;
   border: 0;
-  border-bottom: 2px dashed #dce6f0;
+  border: 2px dashed #dce6f0;
   background: transparent;
   outline: none;
-  border-radius: 0; }
-  .find__option option {
-    font-weight: 400; }
+  border-radius: 4px;
+  text-align-last: center;
+  padding: 0 0.5em; }
+  .search__form__option option {
+    font-weight: 400;
+    text-align: center; }
 
-.find__form {
-  display: inline-block;
-  width: calc(100% - 41em); }
-
-.find__field {
+.search__form__field {
   font: 700 2.2em "Titillium Web";
   color: #1e283c;
   display: inline-block;
-  width: calc(100% - 5.85em);
+  width: calc(100% - 24.5em);
   border: 0;
   border-bottom: 2px solid #e6f0fa;
   background: transparent;
   outline: none; }
 
 .find__submit {
-  font: 700 1.6em "Titillium Web";
+  font: 300 1.6em "Titillium Web";
   color: white;
   display: inline-block;
-  padding: 0.3em 1em;
+  padding: 0.4em 1em;
   border: 0;
   border-bottom: 2px solid #dce6f0;
   background: transparent;
   outline: none;
-  border-radius: 4px;
+  border-radius: 2px;
   background: #F39C12;
   border: 0;
   text-transform: uppercase;
@@ -493,7 +455,10 @@ body {
 .beverage__name {
   font: 700 2.2em "Quicksand";
   color: #1e283c;
-  padding: 0.5em; }
+  padding: 0.5em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
 
 .beverage__statistics {
   background: whitesmoke;

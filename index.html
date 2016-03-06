@@ -16,40 +16,6 @@
 		<body>
 
 
-
-
-
-			<!-- <div class="application">
-				<header class="application__dboard">
-					<div class="dboard__container">
-						<div class="dboard__control">
-
-							<div class="overlay"></div>
-
-							<span class="stores">
-								<button class="stores__store stores__store--active">Barack & King</button>
-								<button class="stores__store">Princess & Concession</button>
-								<button class="stores__store">Division St. & John Counter Bvd.</button>
-							</span>
-
-							<span class="dboard__buffer"></span>
-
-							<form id="alcoholSearch" class="booze-search">
-								<input id="searchProduct" type="text" placeholder="Hol' up" class="booze-search__text">
-							</form>
-							<p class="status">Loading your location</p>
-						</div>
-
-					</div>
-				</header>
-				<div class="drinks cf">
-				</div>
-			</div>
-
-
-			</div> -->
-
-
 			<h1 class="introduction">
 				Liquorcabinet
 			</h1>
@@ -88,35 +54,34 @@
 						<!-- <i class="loc__i"></i> -->
 						<span class="loc__id">
 							<p class="loc__name">Loading Store 1...</p>
-							<p class="loc__hours loc__hours--time"></p>
+							<p class="loc__hours loc__hours--time">Loading Store Hours...</p>
 						</span>
 					</button>
 					<button class="loc">
 						<!-- <i class="loc__i"></i> -->
 						<span class="loc__id">
 							<p class="loc__name">Loading Store 2...</p>
-							<p class="loc__hours loc__hours--no-time"></p>
+							<p class="loc__hours loc__hours--no-time">Loading Store Hours...</p>
 						</span>
 					</button>
 					<button class="loc">
-						<!-- <i class="loc__i"></i> -->
 						<span class="loc__id">
 							<p class="loc__name">Loading Store 3...</p>
-							<p class="loc__hours loc__hours--time"></p>
+							<p class="loc__hours loc__hours--time">Loading Store Hours...</p>
 						</span>
 					</button>
 				</div>
-				<div class="find__search">
-					<p class="find__opening">I'm looking &nbsp;</p>
-					<select class="find__option">
-						<option value="standard">to unwind</option>
-						<option value="skrilla">to save money</option>
-						<option value="fully lit">to be a liability</option>
-					</select>
-					<p class="find__opening">&nbsp; find me some &nbsp;</p>
-					<form class="find__form" id="alcoholSearch">
-						<input type="text" class="find__field" id="searchProduct" autocomplete="off">
-						<input type="submit" class="find__submit" value="Get Drinks">
+				<div class="search">
+					<form class="search__form" id="alcoholSearch">
+						<p class="search__form__opening">I'm looking&nbsp;</p>
+						<select class="search__form__option">
+							<option value="standard">to unwind</option>
+							<option value="skrilla">to save money</option>
+							<option value="fully lit">to be a liability</option>
+						</select>
+						<p class="search__form__opening">&nbsp;find me some&nbsp;</p>
+						<input type="text" class="search__form__field" id="searchProduct" autocomplete="off">
+							<input type="submit" class="find__submit" value="Get Drinks">
 					</form>
 				</div>
 			</header>
@@ -147,8 +112,5 @@
 				{{/resultArray}}
 			</script>
 
-
-				
-<!-- Get typin' so you can start drinkin' -->
 		</body>
 	</html>
