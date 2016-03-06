@@ -71,6 +71,7 @@
 						</span>
 					</button>
 				</div>
+<<<<<<< HEAD
 				<div class="search">
 					<form class="search__form" id="alcoholSearch">
 						<p class="search__form__opening">I'm looking&nbsp;</p>
@@ -82,6 +83,19 @@
 						<p class="search__form__opening">&nbsp;find me some&nbsp;</p>
 						<input type="text" class="search__form__field" id="searchProduct" autocomplete="off">
 							<input type="submit" class="find__submit" value="Get Drinks">
+=======
+				<div class="find__search">
+					<p class="find__opening">I'm looking &nbsp;</p>
+					<select class="find__option">
+						<option value="money">to save money</option>
+						<option value="fresh">for something fresh</option>
+						<option value="decimated">to be a liability</option>
+					</select>
+					<p class="find__opening">&nbsp; find me some &nbsp;</p>
+					<form class="find__form" id="alcoholSearch">
+						<input type="text" class="find__field" id="searchProduct" autocomplete="off">
+						<input type="submit" class="find__submit" value="Get Drinks">
+>>>>>>> 958f20bcbfac6f78b3261cefd1c6afe970ac0309
 					</form>
 				</div>
 			</header>
@@ -96,11 +110,11 @@
 						<p class="beverage__name">{{ name }}</p>
 						<div class="beverage__statistics">
 							<span class="beverage__statistic">
-								<p class="beverage__statistic__number">${{ price }}</p>
+								<p class="beverage__statistic__number">${{price}} {{#saveLogic}}(${{savings}}){{/saveLogic}}</p>
 								<p class="beverage__statistic__cat">Price (CAD)</p>
 							</span>
 							<span class="beverage__statistic">
-								<p class="beverage__statistic__number">{{ units }}</p>
+								<p class="beverage__statistic__number">{{units}}</p>
 								<p class="beverage__statistic__cat">{{ package }}</p>
 							</span>
 							<span class="beverage__statistic">
