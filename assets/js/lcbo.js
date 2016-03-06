@@ -8,6 +8,8 @@ $(function() {
 		var urlSuffix = '&access_key=MDo5ODdkZTJlNC03OGVmLTExZTUtYmFiNC0wM2FkNTRkMjcwOWM6U1pJczR0N2E0VTh0eUFWSVB4ZXFKeGdNblA4V3ZYd041YURk';
 		// global firebase reference
 		var ref;
+		// what page are we on?
+		var currentPage;
 		// coords for geolocation
 		var latitude = 0;
 		var longitude = 0;
@@ -43,7 +45,8 @@ $(function() {
 		$('#alcoholSearch').submit(function(e) {
 			e.preventDefault();
 			// find deals from the current store and a searched value
-			scanProducts(currentStore, $('#searchProduct').val());
+			currentPage = 1;
+			scanProducts(currentStore, $('#searchProduct').val(), prepQuery($('#searchProduct').val()), currentPage);
 			var drinksRef = ref.child("drinks");
 			drinksRef.push().set({
 				drinkName: $('#searchProduct').val(),
@@ -160,27 +163,35 @@ $(function() {
 
 		}
 
-		function scanProducts(closestStore, queryResult) {
-			// split queryResult into an array
+		function prepQuery(queryResult) {
+			var searchFilter;
+			var searchParameters;
+			// split result into an array
 			queryResult = queryResult.split(" ");
-			// how lit are we getting tonight?
-			litLevel = $('.find__option').val();
-			if (litLevel == "money")
-				litParameter = 'sort=limited_time_offer_savings_in_cents.desc,total_package_units.desc';
-			if (litLevel == "fresh")
-				litParameter = 'order=released_on.desc';
-			if (litLevel == "decimated")
-				litParameter = 'order=alcohol_content.desc';
+			// find our filter parameter
+			searchFilter = $('.find__option').val();
+			// assign the associated parameters
+			if (searchFilter == "money")
+				searchParameters = 'sort=limited_time_offer_savings_in_cents.desc,total_package_units.desc';
+			if (searchFilter == "fresh")
+				searchParameters = 'order=released_on.desc';
+			if (searchFilter == "decimated")
+				searchParameters = 'order=alcohol_content.desc';
+			return searchParameters;
+		}
 
-			// get all of the products
+
+		function scanProducts(closestStore, queryResult, filter, page) {
+			// make our ajax call
 			$.ajax({
-				url: urlPrefix + '/products?' + litParameter + '&store=' + closestStore.id + '&q=' + queryResult[0] + urlSuffix,
+				url: urlPrefix + '/products?' + filter + '&store=' + closestStore.id + '&q=' + queryResult[0] + urlSuffix + "&page=" + page,
 				method: 'GET',
 				dataType: 'jsonp',
 				crossDomain: true
 			}).then(function(products) {
 				// clear previous results
 				resultArray = [];
+				console.log(products);
 				// filter and create new product objects to display on page
 				for (var i = 0; i < products.result.length; i++) {
 					if (!products.result[i].is_dead) {
