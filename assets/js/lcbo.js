@@ -24,11 +24,6 @@ $(function() {
 		// let's find out where you are
 		navigator.geolocation.getCurrentPosition(findStores);
 
-		// let's find out what day it is today
-		var date = new Date();
-		var today = date.getDay();
-
-
 		// handle searching for alcohol
 		$('#alcoholSearch').submit(function(e) {
 			e.preventDefault();
@@ -77,7 +72,13 @@ $(function() {
 				$('.loc:nth-of-type(2)').children('.loc__id').children('.loc__name').text(filteredStores[1].name);
 				$('.loc:nth-of-type(3)').children('.loc__id').children('.loc__name').text(filteredStores[2].name);
 				// let's find out when our stores close
-				console.log(opHours(currentStore, today));
+				getStoreStatus(filteredStores[0]);
+				getStoreStatus(filteredStores[1]);
+				getStoreStatus(filteredStores[2]);
+				$('.loc:nth-of-type(1)').children('.loc__id').children('.loc__hours').text(getStoreStatus(filteredStores[0]));
+				$('.loc:nth-of-type(2)').children('.loc__id').children('.loc__hours').text(getStoreStatus(filteredStores[1]));
+				$('.loc:nth-of-type(3)').children('.loc__id').children('.loc__hours').text(getStoreStatus(filteredStores[2]));
+
 				// now we can initialize our map
 				// var map = new google.maps.Map(document.getElementById('map'), {
     //       			zoom: 15,
@@ -130,10 +131,8 @@ $(function() {
 			litLevel = $('#turntLevel').val();
 			if (litLevel == "tipsy")
 				litParameter = 'sort=limited_time_offer_savings_in_cents.desc,total_package_units.desc';
-			if (litLevel == "fully lit") {
+			if (litLevel == "fully lit")
 				litParameter = 'order=alcohol_content.desc';
-				console.log("Hello");
-			}
 
 			// get all of the products
 			$.ajax({
@@ -237,6 +236,50 @@ $(function() {
 			}
 			// return parsed open and close hours in 24 hour time
 			return { o : { h : open / 60 , m : open % 60 } , c : { h : close / 60 , m : close % 60 } };
+		}
+
+		function getStoreStatus(store) {
+			var date = new Date();
+			var dayNumber = date.getDay();
+			var difference;
+			var units = "hours";
+			var storeStatus;
+
+			var storeTime = opHours(store, dayNumber);
+
+			if (date.getHours() > storeTime.o.h && date.getHours() < storeTime.c.h) {
+				// the store is open
+				difference = Math.abs(storeTime.c.h - date.getHours());
+				if (difference == 1) {
+					difference = 60 - date.getMinutes();
+					units = "minutes";
+				}
+				storeStatus = "Closes";
+			}
+			else if (date.getHours() < storeTime.o.h) {
+				// the store is closed (morning)
+				difference = Math.abs(storeTime.o.h- date.getHours());
+				if (difference == 1) {
+					difference = 60 - date.getMinutes();
+					units = "minutes";
+				}
+				storeStatus = "Opens";
+			}
+			else if (date.getHours() > storeTime.c.h) {
+				// the store is closed (night)
+				if (dayNumber == 6)
+					dayNumber = 0;
+				else
+					dayNumber++;
+				storeTime = opHours(store, dayNumber);
+				difference = (24 - date.getHours()) + storeTime.o.h;
+				if (difference == 1) {
+					difference = 60 - date.getMinutes();
+					units = "minutes";
+				}
+				storeStatus = "Opens";
+			}
+			return (storeStatus + " in " + difference + " " + units);
 		}
 
 		function timeRemainingForDeal(store, product) {
