@@ -24,6 +24,11 @@ $(function() {
 		// let's find out where you are
 		navigator.geolocation.getCurrentPosition(findStores);
 
+		// let's find out what day it is today
+		var date = new Date();
+		var today = date.getDay();
+
+
 		// handle searching for alcohol
 		$('#alcoholSearch').submit(function(e) {
 			e.preventDefault();
@@ -45,11 +50,11 @@ $(function() {
 			ref = new Firebase("https://liquorcabinet.firebaseIO.com");
 			// let's listen for other people
 			var drinksRef = new Firebase("https://liquorcabinet.firebaseIO.com/drinks");
-
+			// appending the results
 			drinksRef.limitToLast(1).on("child_added", function(snap) {
 				console.log(snap.val().drinkName);
+				findCity(snap.val().latitude, snap.val().longitude);
 			});
-
 			// a 5000m radius (as the crow flies) for filtering stores
 			var maxRadius = 5000;
 			// GET stores
@@ -68,7 +73,11 @@ $(function() {
 				currentStore = filteredStores[0];
 				// success
 				console.log("We found some stores!");
-
+				$('.loc:nth-of-type(1)').children('.loc__id').children('.loc__name').text(filteredStores[0].name);
+				$('.loc:nth-of-type(2)').children('.loc__id').children('.loc__name').text(filteredStores[1].name);
+				$('.loc:nth-of-type(3)').children('.loc__id').children('.loc__name').text(filteredStores[2].name);
+				// let's find out when our stores close
+				console.log(opHours(currentStore, today));
 				// now we can initialize our map
 				// var map = new google.maps.Map(document.getElementById('map'), {
     //       			zoom: 15,
@@ -89,8 +98,29 @@ $(function() {
 			});
 		}
 
+		function findCity(latitude, longitude) {
+			var geocoder = new google.maps.Geocoder;
+			var location;
+			var latlng = { lat: latitude, lng: longitude };
+			geocoder.geocode({'location': latlng}, function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+					if (results[1]) {
+						location = results[1].formatted_address.split(",")[1];
+						location = location.replace(/\s/g, "");
+						console.log(location);
+						return location;
+					}
+					else {
+						location = "Outer Space";
+						console.log(location);
+						return location;
+					}
+				}
+			});
+		}
+
 		function changeCurrentStore() {
-			
+
 		}
 
 		function scanProducts(closestStore, queryResult) {
