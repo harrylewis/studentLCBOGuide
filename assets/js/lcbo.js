@@ -44,6 +44,7 @@ $(function() {
 		// handle searching for alcohol
 		$('#alcoholSearch').submit(function(e) {
 			e.preventDefault();
+			$('.drinks').html('');
 			// find deals from the current store and a searched value
 			currentPage = 1;
 			scanProducts(currentStore, $('#searchProduct').val(), prepQuery($('#searchProduct').val()), currentPage);
@@ -69,6 +70,7 @@ $(function() {
 			}
 			currentPage = 1;
 			if ($('#searchProduct').val()) {
+				$('.drinks').html('');
 				scanProducts(currentStore, $('#searchProduct').val(), prepQuery($('#searchProduct').val()), currentPage);
 				var drinksRef = ref.child("drinks");
 				drinksRef.push().set({
@@ -78,6 +80,18 @@ $(function() {
 				});
 			}
 		});
+
+		$('.paginate').click(function(e) {
+			e.preventDefault();
+			currentPage++;
+			scanProducts(currentStore, $('#searchProduct').val(), prepQuery($('#searchProduct').val()), currentPage);
+			var drinksRef = ref.child("drinks");
+			drinksRef.push().set({
+				drinkName: $('#searchProduct').val(),
+				latitude: latitude,
+				longitude: longitude
+			});
+		})
 
 		function findStores(position) {
 			// set the coordinates
@@ -193,8 +207,10 @@ $(function() {
 			// find our filter parameter
 			searchFilter = $('.find__option').val();
 			// assign the associated parameters
-			if (searchFilter == "money")
+			if (searchFilter == "budget")
 				searchParameters = 'sort=limited_time_offer_savings_in_cents.desc,total_package_units.desc';
+			if (searchFilter == "money")
+				searchParameters = 'order=price_in_cents.desc';
 			if (searchFilter == "fresh")
 				searchParameters = 'order=released_on.desc';
 			if (searchFilter == "decimated")
@@ -248,7 +264,7 @@ $(function() {
 
 				var template = $('#drinkTemplate').html();
 				var html = Mustache.to_html(template, {resultArray : resultArray});
-				$('.drinks').html(html);
+				$('.drinks').append(html);
 			});
 	
 		}
