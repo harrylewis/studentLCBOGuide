@@ -104,7 +104,7 @@ $(function() {
 							name : products.result[i].name,
 							content: (products.result[i].alcohol_content / 100) + '%',
 							price : parseFloat(Math.round(products.result[i].price_in_cents) / 100).toFixed(2),
-							package : products.result[i].package,
+							package : parsePackage(products.result[i]),
 							units : products.result[i].total_package_units,
 							packageType : products.result[i].package_unit_type,
 							savings : (products.result[i].limited_time_offer_savings_in_cents) / 100,
@@ -148,7 +148,8 @@ $(function() {
 		function parsePackage(product) {
 			var productSplit;
 			if (product.total_package_units > 1) {
-				productSplit = product.package.split("X")[1];
+				productSplit = product.package.split("x")[1];
+				console.log(productSplit);
 				return productSplit;
 			}
 			return product.package;
