@@ -408,7 +408,7 @@ body {
   font: 700 2.2em "Titillium Web";
   color: #1e283c;
   display: inline-block;
-  width: calc(100% - 24.5em);
+  width: calc(100% - 26.7em);
   border: 0;
   border-bottom: 2px solid #e6f0fa;
   background: transparent;
@@ -475,6 +475,9 @@ body {
   font: 500 1.6em/1.2em "Quicksand";
   color: #28323c;
   text-transform: uppercase; }
+
+.beverage__savings {
+  color: #27ae60; }
 
 .beverage__statistic__cat {
   font: 500 1.2em "Quicksand";
