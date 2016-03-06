@@ -245,7 +245,8 @@
 .drinks {
 	max-width: 96em;
 	margin: 0 auto;
-	padding-bottom: 1.5em;
+	padding-top: 1em;
+	padding-bottom: 1em;
 }
 
 	.booze {
@@ -390,11 +391,58 @@
 }
 
 .beverage {
-	width: calc(50% - 2em);
+	width: calc(50% - 1em);
 	margin: 1em 1em;
 	float: left;
-	border: 1px solid red;
+	border-radius: 4px;
+	background: rgb(255,255,255);
+	overflow: hidden;
+
+	&:nth-child(2n + 1) {
+		margin-left: 0;
+	}
+
+	&:nth-child(2n + 2) {
+		margin-right: 0;
+	}
+
 }
+
+
+	.beverage__name {
+		font: 300 2.2em "Titillium Web";
+		color: rgb(30,40,60);
+		padding: 0.5em;
+	}
+
+
+		.beverage__statistics {
+			background: rgb(245,245,245);
+			border-top: 1px solid rgb(230,236,242);
+		}
+
+
+			.beverage__statistic {
+				display: block;
+				float: left;
+				width: 33.3333%;
+				border-right: 1px solid rgb(240,240,240);
+				padding: 0.75em 1.1em;
+			}
+
+
+				.beverage__statistic__number {
+					font: 300 1.6em/1em "Titillium Web";
+					color: rgb(70,80,100);
+					text-transform: uppercase;
+				}
+
+
+				.beverage__statistic__cat {
+					font: 300 1.2em "Titillium Web";
+					color: rgb(110,120,140);
+					text-transform: uppercase;
+				}
 
 
 .loc--active {

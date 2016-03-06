@@ -94,35 +94,28 @@
 				</div>
 			</header>
 
-			<!-- <div class="controls"> -->
-				<!-- <div class="current-store cf"> -->
-					<!-- <button class="current-store__location current-store__location--active">Barack & King</button>
-					<button class="current-store__location">Princess & Concession</button>
-					<button class="current-store__location">Division St. & John Counter Blvd.</button> -->
-					<!-- <span class="current-store__information">
-						<p class="current-store__information__store">You are currently searching at the <b>Barack & King</b> LCBO Location, which closes in 5 hours</p>
-					</span> -->
-					<!-- <span class="current-store__button"></span> -->
-				<!-- </div> -->
-				<!-- <form id="alcoholSearch" class="search cf">
-					<input type="text" id="searchProduct" class="search__field" placeholder="Start typin' so you can start drink'">
-					<input type="submit" class="search__submit" value="">
-				</form> -->
-
-			<!-- </div> -->
+			
 
 			<div class="drinks cf"></div>
 
 			<script id="drinkTemplate" type="text/template">
 				{{#resultArray}}
 					<article class="beverage">
-						<div class="booze__product cf">
-							<p class="booze__product__name">{{ name }}</p>
-							<p class="booze__product__quantity">{{ package }}</p>
+						<p class="beverage__name">{{ name }}</p>
+						<div class="beverage__statistics">
+							<span class="beverage__statistic">
+								<p class="beverage__statistic__number">{{ price }}</p>
+								<p class="beverage__statistic__cat">Price (CAD)</p>
+							</span>
+							<span class="beverage__statistic">
+								<p class="beverage__statistic__number">{{ units }}</p>
+								<p class="beverage__statistic__cat">{{ package }}</p>
+							</span>
+							<span class="beverage__statistic">
+								<p class="beverage__statistic__number">{{ content }}</p>
+								<p class="beverage__statistic__cat">ABV</p>
+							</span>
 						</div>
-						<div class="booze__price"></div>
-						<!-- <p class="booze__name">{{name}}</p> -->
-						<!-- <p class="booze__price">${{price}}</p> -->
 					</article>
 				{{/resultArray}}
 			</script>
