@@ -18,9 +18,22 @@ $(function() {
 		var resultArray = [];
 		// how weird are things getting tonight?
 		var litLevel;
-		// let's search for some fun stuff
 		var litParameter;
+		// some funny names
+		var nameArray = ["Anita Gibbs", "Angelo Barker", "Alfonze Carpenter", "Emilio Foster",
+						 "Jody Santos", "Karl Jones", "Edna Sharp", "Miguel O'Brien",
+						 "Gertrude Thornton", "Muriel Wells", "Angelina Welch", "Tammy James",
+						 "Gregory Stokes", "Valerie Guzman", "Beth Franklin", "Pedro Sparks"];
 		
+		// let's listen for other people
+		var drinksRef = new Firebase("https://liquorcabinet.firebaseIO.com/drinks");
+		// appending the results
+		drinksRef.limitToLast(1).on("child_added", function(snap) {
+			console.log(snap.val().drinkName);
+			findCity(snap.val().latitude, snap.val().longitude);
+			displayRealTime(snap.val().drinkName, findCity(snap.val().latitude, snap.val().longitude), nameArray[Math.floor(Math.random() * myArray.length)]);
+		});
+
 		// let's find out where you are
 		navigator.geolocation.getCurrentPosition(findStores);
 
@@ -43,13 +56,6 @@ $(function() {
 			longitude = position.coords.longitude;
 			// set our Firebase reference
 			ref = new Firebase("https://liquorcabinet.firebaseIO.com");
-			// let's listen for other people
-			var drinksRef = new Firebase("https://liquorcabinet.firebaseIO.com/drinks");
-			// appending the results
-			drinksRef.limitToLast(1).on("child_added", function(snap) {
-				console.log(snap.val().drinkName);
-				findCity(snap.val().latitude, snap.val().longitude);
-			});
 			// a 5000m radius (as the crow flies) for filtering stores
 			var maxRadius = 5000;
 			// GET stores
@@ -109,15 +115,17 @@ $(function() {
 						location = results[1].formatted_address.split(",")[1];
 						location = location.replace(/\s/g, "");
 						console.log(location);
-						return location;
 					}
 					else {
 						location = "Outer Space";
 						console.log(location);
-						return location;
 					}
 				}
 			});
+		}
+
+		function displayRealTime(drink, city, name) {
+			
 		}
 
 		function changeCurrentStore() {
