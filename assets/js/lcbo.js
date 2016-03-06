@@ -145,6 +145,15 @@ $(function() {
 				return product.volume_in_milliliters;
 		}
 
+		function parsePackage(product) {
+			var productSplit;
+			if (product.total_package_units > 1) {
+				productSplit = product.package.split("X")[1];
+				return productSplit;
+			}
+			return product.package;
+		}
+
 		function opHours(store, day) {
 			var open = 0;
 			var close = 0;
