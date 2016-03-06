@@ -11,6 +11,17 @@
     		async defer></script>
     		<script src="assets/js/mustache.js"></script>
     		 <script src="assets/js/lcbo.js"></script>
+
+    		<script>
+
+    		$(function() {
+    			setInterval(function() {
+    				$('.firebase__ticker__flipper').toggleClass('firebase__ticker__flipper--transform');
+    			}, 2000);
+    		});
+
+    		</script>
+
 		</head>
 		<body>
 
@@ -50,9 +61,34 @@
 
 
 			<h1 class="introduction">
-				Student LCBO guide, a service that helps you, <b>a poor and helpless
-				student</b>, find the most bang for your buck, at the nearest LCBO store.
+				Liquorcabinet
 			</h1>
+
+			<p class="introduction__prompt">What are you drinking tonight?</p>
+
+			<div class="firebase">
+				<div class="firebase__ticker">
+					<div class="firebase__ticker__flipper">
+						<span class="firebase__ticker__flipper__front">Sir Lancelot</span>
+						<span class="firebase__ticker__flipper__back">Evan</span>
+					</div>
+				</div>
+				<p class="firebase__base">&nbsp;from&nbsp;</p>
+				<div class="firebase__ticker">
+					<div class="firebase__ticker__flipper">
+						<span class="firebase__ticker__flipper__front">Kingston, ON</span>
+						<span class="firebase__ticker__flipper__back">Barrie, ON</span>
+					</div>
+				</div>
+				<p class="firebase__base">&nbsp;is looking for&nbsp;</p>
+				<div class="firebase__ticker">
+					<div class="firebase__ticker__flipper">
+						<span class="firebase__ticker__flipper__front">Smirnoff</span>
+						<span class="firebase__ticker__flipper__back">Beer</span>
+					</div>
+				</div>
+				<p class="firebase__base">&nbsp;in their cabinet.</p>
+			</div>
 
 			<!-- <div class="location"></div> -->
 
