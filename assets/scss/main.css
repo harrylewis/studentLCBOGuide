@@ -301,7 +301,8 @@ body {
 .drinks {
   max-width: 96em;
   margin: 0 auto;
-  padding-bottom: 1.5em; }
+  padding-top: 1em;
+  padding-bottom: 1em; }
 
 .booze {
   width: 50%;
@@ -412,10 +413,42 @@ body {
     border-right: none; }
 
 .beverage {
-  width: calc(50% - 2em);
+  width: calc(50% - 1em);
   margin: 1em 1em;
   float: left;
-  border: 1px solid red; }
+  border-radius: 4px;
+  background: white;
+  overflow: hidden; }
+  .beverage:nth-child(2n + 1) {
+    margin-left: 0; }
+  .beverage:nth-child(2n + 2) {
+    margin-right: 0; }
+
+.beverage__name {
+  font: 300 2.2em "Titillium Web";
+  color: #1e283c;
+  padding: 0.5em; }
+
+.beverage__statistics {
+  background: whitesmoke;
+  border-top: 1px solid #e6ecf2; }
+
+.beverage__statistic {
+  display: block;
+  float: left;
+  width: 33.3333%;
+  border-right: 1px solid #f0f0f0;
+  padding: 0.75em 1.1em; }
+
+.beverage__statistic__number {
+  font: 300 1.6em/1em "Titillium Web";
+  color: #465064;
+  text-transform: uppercase; }
+
+.beverage__statistic__cat {
+  font: 300 1.2em "Titillium Web";
+  color: #6e788c;
+  text-transform: uppercase; }
 
 .loc--active {
   background: whitesmoke; }
