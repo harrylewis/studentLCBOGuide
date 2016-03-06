@@ -30,8 +30,7 @@ $(function() {
 		// appending the results
 		drinksRef.limitToLast(1).on("child_added", function(snap) {
 			console.log(snap.val().drinkName);
-			findCity(snap.val().latitude, snap.val().longitude);
-			displayRealTime(snap.val().drinkName, findCity(snap.val().latitude, snap.val().longitude), nameArray[Math.floor(Math.random() * myArray.length)]);
+			displayRealTime(snap.val().drinkName, findCity(snap.val().latitude, snap.val().longitude), nameArray[Math.floor(Math.random() * nameArray.length)]);
 		});
 
 		// let's find out where you are
@@ -114,18 +113,16 @@ $(function() {
 					if (results[1]) {
 						location = results[1].formatted_address.split(",")[1];
 						location = location.replace(/\s/g, "");
-						console.log(location);
 					}
 					else {
 						location = "Outer Space";
-						console.log(location);
 					}
 				}
 			});
 		}
 
 		function displayRealTime(drink, city, name) {
-			
+
 		}
 
 		function changeCurrentStore() {
