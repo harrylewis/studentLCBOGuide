@@ -114,7 +114,10 @@ table {
 body {
   background: #1eaaf1;
   background: #F39C12;
-  font-size: 62.5%; }
+  font-size: 62.5%;
+  background: #f39c12 url("../images/bg.png") no-repeat center top;
+  background-size: 120em;
+  background-position: auto -8em; }
 
 .application {
   min-height: 100vh;
@@ -131,7 +134,7 @@ body {
   max-width: 20em;
   text-align: center;
   margin: 0 auto;
-  margin-top: 1em;
+  margin-top: 2em;
   font: 500 4em "Pacifico";
   color: white; }
 
@@ -141,7 +144,7 @@ body {
   margin: 0 auto;
   font: 500 2em "Quicksand";
   color: #fafafa;
-  margin-bottom: 2em;
+  margin-bottom: 4em;
   letter-spacing: 0.01em; }
 
 .introduction__text {
@@ -436,7 +439,8 @@ body {
   padding: 1em 2em;
   background: transparent;
   border: 0;
-  border-right: 1px solid whitesmoke; }
+  border-right: 1px solid whitesmoke;
+  outline: none; }
   .loc:last-of-type {
     border-right: none; }
 
