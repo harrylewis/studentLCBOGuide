@@ -117,9 +117,9 @@ $(function() {
 				currentStore = filteredStores[0];
 				// success
 				console.log("We found some stores!");
-				$('.loc:nth-of-type(1)').children('.loc__id').children('.loc__name').text(filteredStores[0].name);
-				$('.loc:nth-of-type(2)').children('.loc__id').children('.loc__name').text(filteredStores[1].name);
-				$('.loc:nth-of-type(3)').children('.loc__id').children('.loc__name').text(filteredStores[2].name);
+				$('.loc:nth-of-type(1)').children('.loc__id').children('.loc__name').text(filteredStores[0].name + " LCBO");
+				$('.loc:nth-of-type(2)').children('.loc__id').children('.loc__name').text(filteredStores[1].name + " LCBO");
+				$('.loc:nth-of-type(3)').children('.loc__id').children('.loc__name').text(filteredStores[2].name + " LCBO");
 				// let's find out when our stores close
 				getStoreStatus(filteredStores[0]);
 				getStoreStatus(filteredStores[1]);
